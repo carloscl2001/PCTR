@@ -3,6 +3,7 @@ import java.util.*;// es para poder usar todas las funciones de la biblioteca ut
 
 public class nAleatorio {
   public static void main(String[] args){
+    System.out.println("Introduce la cantidad de numero a generar");
     Scanner s = new Scanner(System.in);
     int     n = s.nextInt();
     Random  r = new Random();
