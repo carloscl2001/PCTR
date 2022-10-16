@@ -22,7 +22,8 @@ public class incConcurrente
     public static void main(String[] args)
       throws InterruptedException
     {
-    	int p = 100;
+      
+      int p = 100;
         incConcurrente[] h = new incConcurrente[p];
         for(int i=0;i<h.length;i++)h[i] = new incConcurrente(1000);
         for(int i=0;i<h.length;i++)h[i].start();
