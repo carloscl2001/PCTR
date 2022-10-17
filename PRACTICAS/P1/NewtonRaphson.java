@@ -24,10 +24,10 @@ public class NewtonRaphson {
         System.out.print("Introduce la funcion(1 o 2) -> ");
         int fun = s.nextInt();
 
-        System.out.print("Introdue la aproximaion inicial -> ");
+        System.out.print("Introduce la aproximaion inicial -> ");
         double aprox = s.nextDouble();
 
-        System.out.print("Introdue el numero de interaciones que desees.... -> ");
+        System.out.print("Introduce el numero de interaciones que desees.... -> ");
         int interac = s.nextInt();
 
         double xn = aprox;
