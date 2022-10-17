@@ -1,5 +1,4 @@
-import java.util.*;
-import java.lang.Math;
+import java.util.Scanner;
 
 public class ej1 {
     
@@ -7,12 +6,13 @@ public class ej1 {
         return Math.cos(x) - Math.pow(x,3);
     }
 
-    public static double g(double x){
+    public static double fd(double x){
         return -Math.sin(x) - 3*Math.pow(x,2);
     }
     
     
     public static void main(String[] args){
+
         Scanner s = new Scanner(System.in);
         System.out.print("Introdue la aproximaion inicial -> ");
         double aprox = s.nextDouble();
@@ -23,7 +23,7 @@ public class ej1 {
         double xn1 = 0;
 
         for(int i = 0; i < interac; i++){
-            xn1 = xn - f(xn) / g(xn);
+            xn1 = xn - f(xn) / fd(xn);
 
             System.out.println("Iteracion numero: " + i + " | Aproximacion: " + xn);
 
