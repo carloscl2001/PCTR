@@ -5,9 +5,10 @@ public class intDefinidaMonteCarlo{
 
         Scanner s = new Scanner(System.in);
 
+
         System.out.print("Introduce el numero de puntos-> ");
         int puntos = s.nextInt();
     }
 
-    
+
 }
