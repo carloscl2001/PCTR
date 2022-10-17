@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class ej1 {
+public class NewtonRaphson {
     
     public static double f(double x){
         return Math.cos(x) - Math.pow(x,3);
