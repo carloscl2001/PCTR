@@ -9,8 +9,8 @@ public class Usa_hebra{
     public static void main(String[] args) throws Exception
     {
         
-        hebra h1 = new hebra(10000 , 0) ;
-        hebra h2 = new hebra(10000 , 1) ;
+        hebra h1 = new hebra(500 , 0) ;
+        hebra h2 = new hebra(500 , 1) ;
         h1.start();
         h2.start();
         h1.join();
