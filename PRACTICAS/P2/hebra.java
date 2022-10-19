@@ -33,6 +33,10 @@ public class hebra extends Thread{
         case 1: for(int i =0; i < nVueltas ; i ++) n--; break ;
         }
     }
-
+    
+    /**
+     * Método que devuelve el valor de la variable estática n
+     * @return n ->variable estatica de la clase hebra
+     */
     public static int n() {return n;}
 }
