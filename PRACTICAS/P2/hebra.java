@@ -1,6 +1,10 @@
 package PRACTICAS.P2;
 
 import java.util.*;
+/**
+ * @author Carlos Antonio Cortés Lora
+ * @param 
+ */
 
 public class hebra extends Thread{
     private int tipoHilo ;
@@ -19,4 +23,6 @@ public class hebra extends Thread{
         case 1: for(int i =0; i < nVueltas ; i ++) n--; break ;
         }
     }
+
+    public staticint n() {return n;}
 }
