@@ -1,6 +1,7 @@
 import java.util.*;
-/**\
+/**
  * Clase que almacena los metodos y atributos necesarios
+ * 
  * @author Carlos Antonio Cortés Lora
  */
 
