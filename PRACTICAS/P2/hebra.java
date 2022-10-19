@@ -1,9 +1,7 @@
-package PRACTICAS.P2;
-
 import java.util.*;
-/**
+/**\
+ * Clase que almacena los metodos y atributos necesarios
  * @author Carlos Antonio Cortés Lora
- * @param 
  */
 
 public class hebra extends Thread{
@@ -24,5 +22,5 @@ public class hebra extends Thread{
         }
     }
 
-    public staticint n() {return n;}
+    public static int n() {return n;}
 }
