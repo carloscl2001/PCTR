@@ -12,7 +12,7 @@ public class Usa_hebra{
         h2.start() ;
         h1.join() ;
         h2.join () ;
-        System.out.println(hebra.n());
+        System.out.println(h1.n());
     
     
     }
