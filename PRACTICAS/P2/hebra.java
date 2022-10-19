@@ -1,6 +1,6 @@
 import java.util.*;
 /**
- * Clase que almacena los metodos y atributos necesarios
+ * Clase que almacena los metodos y atributos necesarios para una hebra
  * 
  * @author Carlos Antonio Cortés Lora
  */
