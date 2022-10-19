@@ -1,4 +1,5 @@
 package PRACTICAS.P2;
+
 import java.util.*;
 
 public class hebra extends Thread{

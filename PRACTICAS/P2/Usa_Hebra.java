@@ -1,5 +1,7 @@
 package PRACTICAS.P2;
 
+import java.util.*;
+
 public class Usa_hebra {
     public static void main(String[] args)
         throws Exception
