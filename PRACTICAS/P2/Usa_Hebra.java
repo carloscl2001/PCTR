@@ -2,7 +2,7 @@ package PRACTICAS.P2;
 
 public class Usa_hebra {
     public static void main(String[] args)
-    throws Exception
+        throws Exception
     {
         
         hebra p = new hebra(10000 , 0) ;
