@@ -6,7 +6,7 @@ import java.util.Vector;
 public class escalaVector{
 
     public static int potencia = 6;
-    public static int[] datos = new int[(int)Math.pow(10, potencia)];
+    public static int[] datos = new int[(int)(Math.pow(10, potencia))];
 	
     public static void main(String[] args) throws Exception{
         
