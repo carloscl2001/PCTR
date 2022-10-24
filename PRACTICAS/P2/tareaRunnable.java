@@ -26,7 +26,7 @@ public class tareaRunnable implements Runnable{
     /**
      * Modificador -> incrementa n en 1
      */
-    public void aumenta()
+    public static void aumenta()
     {
         n++;
     }
@@ -34,7 +34,7 @@ public class tareaRunnable implements Runnable{
     /**
      * Modificador -> reduce n en 1
      */
-    public void reduce()
+    public static void reduce()
     {
         n--;
     }
@@ -44,7 +44,7 @@ public class tareaRunnable implements Runnable{
      * {@code n}
      * @return n
      */
-    public int n_()
+    public static int n_()
     {
         return n;
     }
@@ -58,9 +58,5 @@ public class tareaRunnable implements Runnable{
         case 1: for(int i =0; i < nVueltas ; i ++) reduce(); break ;
         }
     }
-    
-    /**
-     * Método que devuelve el valor de la variable estática n
-     * @return n ->variable estatica de la clase hebra
-     */
+
 }
