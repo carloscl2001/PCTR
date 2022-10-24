@@ -1,11 +1,9 @@
-package PRACTICAS.P2;
-
 import java.util.Vector;
 /**
  * @author  Carlos A Cortés Lora
  * @return devuelve un vector generado aleatoriamente y escalado
  */
-public class escalaVector {
+public class escalaVector{
 
     public static int potencia = 6;
     public static int[] datos = new int[(int)Math.pow(10, potencia)];
