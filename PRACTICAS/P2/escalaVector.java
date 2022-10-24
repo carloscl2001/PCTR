@@ -1,7 +1,7 @@
 import java.util.Vector;
 /**
  * @author  Carlos A Cortés Lora
- * @return devuelve un vector generado aleatoriamente y escalado
+ * @return devuelve un vector generado aleatoriamente y escalado de forma secuencial
  */
 public class escalaVector{
 
