@@ -1,3 +1,4 @@
+package ej4;
 public class redCajeros {
     
     public static void main(String[] args) throws Exception{

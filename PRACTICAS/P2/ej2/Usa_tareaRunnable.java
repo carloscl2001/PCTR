@@ -1,3 +1,4 @@
+package ej2;
 public class Usa_tareaRunnable {
 
     public static void main(String[] args) throws Exception
