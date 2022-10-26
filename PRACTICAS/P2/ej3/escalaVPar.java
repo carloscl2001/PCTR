@@ -66,5 +66,4 @@ class hilo extends Thread {
             vec[i] *= esc;
         }
     }
-
 }
