@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Clase para el ejercicio 5
@@ -31,5 +31,4 @@ public class concursoLambda {
 
         System.out.println(var_critica);
     }
-    
 }
