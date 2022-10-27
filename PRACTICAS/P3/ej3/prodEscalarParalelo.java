@@ -6,9 +6,10 @@ public class prodEscalarParalelo extends Thread {
 
 
     public static int nHebras = 4;
-    public static final int potencia = 1;
-    public static int[] vector1 = new int[(int)Math.pow(8, potencia)];
-    public static int[] vector2 = new int[(int)Math.pow(8, potencia)];
+    public static final int potencia = 6;
+    public static final int p = 10;
+    public static int[] vector1 = new int[(int)Math.pow(p, potencia)];
+    public static int[] vector2 = new int[(int)Math.pow(p, potencia)];
     public static int[] productoParcial = new int[nHebras];
 
     /**
@@ -25,12 +26,12 @@ public class prodEscalarParalelo extends Thread {
 
 
     /**
-     * Metodo para rellenar los vectores con numeros aleatorios
+     * Metodo para rellenar los vectores 
      */
     public static void rellenarVectores(){
         for (int i = 0; i < vector1.length; i++) {
-            vector1[i] = (int) (Math.random() * 10);
-            vector2[i] = (int) (Math.random() * 10);
+            vector1[i] = i;
+            vector2[i] = i;
         }
 
         for (int i = 0; i < productoParcial.length; i++) {
@@ -39,28 +40,7 @@ public class prodEscalarParalelo extends Thread {
     }
     
 
-    /**
-     * Funcion para imprimir por pantalla los vectores
-     */
-    public static void imprimirVectores() {
-        System.out.print("Vector 1: ");
-        for (int i = 0; i < vector1.length; i++) {
-            System.out.print(vector1[i] + " ");
-        }
-        System.out.println();
-        System.out.print("Vector 2: ");
-        for (int i = 0; i < vector2.length; i++) {
-            System.out.print(vector2[i] + " ");
-        }
-        System.out.println();
-        
-        System.out.print("Vector Resultado: ");
-        for (int i = 0; i < productoParcial.length; i++) {
-            System.out.print(productoParcial[i] + " ");
-        }
-        System.out.println();
-        
-    }
+    
 
     
     /**
@@ -93,6 +73,8 @@ public class prodEscalarParalelo extends Thread {
         prodEscalarParalelo hebra3 = new prodEscalarParalelo(2, vector1.length/2, 3*(vector1.length/4));
         prodEscalarParalelo hebra4 = new prodEscalarParalelo(3, vector1.length*3/4, vector1.length);
 
+        long startTime = System.nanoTime();
+        
         hebra1.start();
         hebra2.start();
         hebra3.start();
@@ -102,8 +84,9 @@ public class prodEscalarParalelo extends Thread {
         hebra2.join();
         hebra3.join();
         hebra4.join();
-        
-        imprimirVectores();
+
+        long endTime = System.nanoTime();
         obtenerResultado();
+        System.out.println("Duración: " + (endTime-startTime)/1e6 + " ms");
     }
 }
