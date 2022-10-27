@@ -1,16 +1,26 @@
 /**
- * Clase para ejecutar el ejerciciio de manera secuencial
+ * Clase para realizar el producto de una matriz por un vector de manera concurrente
  * @author Carlos Antonio Cortés Lora
- * @version secuencial
+ * @version concurrente
  */
-public class mathVector {
-
+public class matVectorConcurrente implements Runnable{
+    
     //Variables estáticas
-    public static int n = 4;
+    public static int n = 2;
     public static int m[][] = new int[n][n];
     public static int v[] = new int[n];
     public static int r[] = new int[n];
 
+    //Atributo
+    public  int idHebra;
+
+    /**
+     * Constructor de la clase
+     * @param idHebra identificador de la hebra
+     */
+    public matVectorConcurrente(int idHebra){
+        this.idHebra = idHebra;
+    }
 
     /**
      * Funcion para rellenar una matriz con numeros aleatorios
@@ -61,21 +71,18 @@ public class mathVector {
     }
 
     /**
-     *  Funcion para multiplicar una matriz por un vector y guardar el resultado en otro vector
-     * @param m matriz
-     * @param v vector
-     * @param r vector solucion
+     * Sobrecarga de metodo run
      */
-    public static void multiplicarMatrizVector(int m[][], int v[], int r[]){
-        for (int i = 0; i < m.length; i++) {
-            for (int j = 0; j < m[i].length; j++) {
-                r[i] += m[i][j] * v[j];
-            }
+    @Override
+    public void run(){
+        for(int i = 0; i < n; i++){
+            r[idHebra] = r[idHebra] + m[idHebra][i] * v[i];
         }
     }
 
+
     /**
-     * Main del ejercicio de la version secuencial
+     * Main del ejercicio de la version multihilo
      * @param args
      * @throws Exception
      */
@@ -86,8 +93,17 @@ public class mathVector {
         imprimirMatriz(m);
         System.out.println("\n");
         imprimirVector(v);
+        
+        matVectorConcurrente m1 = new matVectorConcurrente(0);
+        matVectorConcurrente m2 = new matVectorConcurrente(1);
 
-        multiplicarMatrizVector(m, v, r);
+        Thread t1 = new Thread(m1);
+        Thread t2 = new Thread(m2);
+        t1.start();
+        t2.start();
+
+        t1.join();
+        t2.join();
 
         System.out.println("\n\tRESULTADO ");
         imprimirVector(r);
