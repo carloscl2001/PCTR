@@ -12,6 +12,7 @@ public class prodEscalarParalelo extends Thread {
     public static int[] vector2 = new int[(int)Math.pow(p, potencia)];
     public static int[] productoParcial = new int[nHebras];
 
+
     /**
      * Constructor de la clase
      * @param idHebra
@@ -39,9 +40,6 @@ public class prodEscalarParalelo extends Thread {
         }
     }
     
-
-    
-
     
     /**
      * Sobrecarga del metodo run
@@ -55,15 +53,19 @@ public class prodEscalarParalelo extends Thread {
             }
         }
     }
-    
+
+
+    /**
+     * Metodo para calcular el resultado final
+     */
     public static void obtenerResultado(){
         int resultado = 0;
         for(int i=0; i < productoParcial.length; i++){
             resultado = resultado + productoParcial[i];
         }
         System.out.println("El resultado de la suma es: " + resultado);
-
     }
+
 
     public static void main(String[] args) throws Exception{
         rellenarVectores();
