@@ -5,7 +5,7 @@ public class prodEscalarParalelo extends Thread {
     public int fin;
 
 
-    public static int nHebras = 4;
+    public static int nHebras = 10;
     public static final int potencia = 6;
     public static final int p = 10;
     public static int[] vector1 = new int[(int)Math.pow(p, potencia)];
@@ -70,22 +70,22 @@ public class prodEscalarParalelo extends Thread {
     public static void main(String[] args) throws Exception{
         rellenarVectores();
 
-        prodEscalarParalelo hebra1 = new prodEscalarParalelo(0, 0, vector1.length/4);
-        prodEscalarParalelo hebra2 = new prodEscalarParalelo(1, vector1.length/4, vector1.length/2);
-        prodEscalarParalelo hebra3 = new prodEscalarParalelo(2, vector1.length/2, 3*(vector1.length/4));
-        prodEscalarParalelo hebra4 = new prodEscalarParalelo(3, vector1.length*3/4, vector1.length);
-
         long startTime = System.nanoTime();
+
+        prodEscalarParalelo hebra1 = new prodEscalarParalelo(0, 0, vector1.length/2);
+        prodEscalarParalelo hebra2 = new prodEscalarParalelo(1, vector1.length/2, vector1.length);
+ 
         
         hebra1.start();
         hebra2.start();
-        hebra3.start();
-        hebra4.start();
 
+        
         hebra1.join();
         hebra2.join();
-        hebra3.join();
-        hebra4.join();
+ 
+
+
+
 
         long endTime = System.nanoTime();
         obtenerResultado();
