@@ -4,7 +4,6 @@ public class prodEscalarParalelo extends Thread {
     public int ini;
     public int fin;
 
-
     public static int nHebras = 10;
     public static final int potencia = 6;
     public static final int p = 10;
@@ -74,19 +73,13 @@ public class prodEscalarParalelo extends Thread {
 
         prodEscalarParalelo hebra1 = new prodEscalarParalelo(0, 0, vector1.length/2);
         prodEscalarParalelo hebra2 = new prodEscalarParalelo(1, vector1.length/2, vector1.length);
- 
         
         hebra1.start();
         hebra2.start();
 
-        
         hebra1.join();
         hebra2.join();
  
-
-
-
-
         long endTime = System.nanoTime();
         obtenerResultado();
         System.out.println("Duración: " + (endTime-startTime)/1e6 + " ms");
