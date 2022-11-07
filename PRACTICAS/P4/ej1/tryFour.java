@@ -9,6 +9,7 @@ public class tryFour {
      */
     static boolean wantp = false;
     static boolean wantq = false;
+    static int n = 0;
 
     
     /**
@@ -16,15 +17,18 @@ public class tryFour {
      */
     class p extends Thread {
         public void run() {
-            while(true) {
+            while(true){
                 //non-critical section
                 wantp = true;
                 while(wantq){
                     wantp = false;
                     wantp = true;
                 }
+                n++;
                 System.out.println(this.getName());
                 wantp = false;
+
+                System.out.println(n);
             }
         }
     }
@@ -42,8 +46,11 @@ public class tryFour {
                     wantq = false;
                     wantq = true;
                 }
+                n--;
                 System.out.println(this.getName());
                 wantq = false;
+
+                System.out.println(n);
             }
 
         }
@@ -63,6 +70,8 @@ public class tryFour {
 
         p.join();
         q.join();
+
+        System.out.println(n);
     }
 
     /**

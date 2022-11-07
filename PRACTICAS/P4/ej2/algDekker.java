@@ -10,6 +10,7 @@ public class algDekker {
     static boolean wantp = false;
     static boolean wantq = false;
     static int turn = 1;
+    static int n = 0;
 
 
     /**
@@ -17,18 +18,19 @@ public class algDekker {
      */
     class p extends Thread {
         public void run() {
-            while(true) {
+            for(int i = 0; i < 10000; i++) {
                 //non-critical section
                 wantp = true;
-                while(wantq){
+                while(wantq == true){
                     if(turn == 2){
                         wantp = false;
-                        while(turn == 1);
+                        while(turn != 1);
                         wantp = true;
                     }
-                    wantp = true;
                 }
                 System.out.println(this.getName());
+                n++;
+                System.out.println(n);
                 turn = 2;
                 wantp = false;
             }
@@ -41,18 +43,19 @@ public class algDekker {
      */
     class q extends Thread {
         public void run() {
-            while(true) {
+            for(int i = 0; i < 10000; i++){
                 //non-critical section
                 wantq = true;
-                while(wantp){
+                while(wantp == true){
                     if(turn == 1){
                         wantq = false;
-                        while(turn == 2);
+                        while(turn != 2);
                         wantq = true;
                     }
-                    wantq = true;
                 }
                 System.out.println(this.getName());
+                n--;
+                System.out.println(n);
                 turn = 1;
                 wantq = false;
             }
@@ -60,7 +63,7 @@ public class algDekker {
         }
     }
 
-/**
+    /**
      * Constructor de la clase donde se crean los hilos y se ejecutan
      */
     public algDekker() throws Exception{
@@ -69,10 +72,14 @@ public class algDekker {
         Thread q = new q();
 
         p.start();
+        p.join();
         q.start();
 
-        p.join();
+        
         q.join();
+
+        System.out.println("Fin");	
+        System.out.println(n);
     }
 
     /**
@@ -82,6 +89,5 @@ public class algDekker {
      */
     public static void main(String[] args) throws Exception {
         new algDekker();
-        
     }
 }

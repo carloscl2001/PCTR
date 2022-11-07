@@ -8,6 +8,7 @@ public class tryThree {
      */
     public static boolean wantp = false;
     public static boolean wantq = false;
+    static int n = 0;
 
     
     /**
@@ -15,12 +16,15 @@ public class tryThree {
      */
     class p extends Thread {
         public void run() {
-            while(true) {
+            for(int i = 0; i < 100000; i++){
                 //non-critical section
                 wantp = true;
-                while(wantq == false);   
-                System.out.println(this.getName());           
+                while(wantq != false);   
+                System.out.println(this.getName());
+                n++;          
                 wantp = false;
+                System.out.println(n);
+            
             }
         }
     }
@@ -30,12 +34,14 @@ public class tryThree {
      */
     class q extends Thread {
         public void run() {
-            while(true) {
+            for(int i = 0; i < 100000; i++){
                 //non-critical section
                 wantq = true;
-                while(wantp == false);
-                System.out.println(this.getName());  
+                while(wantp != false);
+                System.out.println(this.getName());
+                n--;     
                 wantq = false;
+                System.out.println(n);
             }
         }
     }
