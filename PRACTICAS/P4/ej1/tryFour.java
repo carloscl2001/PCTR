@@ -1,21 +1,19 @@
-/**
- * tryThree
- */
-public class tryThree {
 
-    public static bool wantp = false;
-    public static bool wantq = false;
+public class tryFour {
     
+    static boolean wantp = false;
+    static boolean wantq = false;
 
     class p extends Thread {
         public void run() {
             while(true) {
                 //non-critical section
                 wantp = true;
-                while(wantq == false){
-                    //do nothing
+                while(wantq){
+                    wantp = false;
+                    wantp = true;
                 }
-                //critical section
+                Thread.getName();
                 wantp = false;
             }
         }
@@ -26,25 +24,26 @@ public class tryThree {
             while(true) {
                 //non-critical section
                 wantq = true;
-                while(wantp == false){
-                    //do nothing
+                while(wantp){
+                    wantq = false;
+                    wantq = true;
                 }
-                //critical section
+                Thread.getName();
                 wantq = false;
             }
 
         }
     }
 
-    
-    public static void main(String[] args) throws Exception {
+
+    public static void main(String[] args) {
+
         Thread p = new p();
         Thread q = new q();
 
         p.start();
         q.start();
 
+        System.out.println("Hello, World!");
     }
-
-
 }
