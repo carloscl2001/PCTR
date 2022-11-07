@@ -7,8 +7,8 @@ public class tryFour {
     /**
      * Variabales staticas booleanas
      */
-    static boolean wantp = false;
-    static boolean wantq = false;
+    static boolean flagP = false;
+    static boolean flagQ = false;
     static int n = 0;
 
     
@@ -19,14 +19,14 @@ public class tryFour {
         public void run() {
             while(true){
                 //non-critical section
-                wantp = true;
-                while(wantq){
-                    wantp = false;
-                    wantp = true;
+                flagP = true;
+                while(flagQ){
+                    flagP = false;
+                    flagP = true;
                 }
                 n++;
                 System.out.println(this.getName());
-                wantp = false;
+                flagP = false;
 
                 System.out.println(n);
             }
@@ -41,14 +41,14 @@ public class tryFour {
         public void run() {
             while(true) {
                 //non-critical section
-                wantq = true;
-                while(wantp){
-                    wantq = false;
-                    wantq = true;
+                flagQ = true;
+                while(flagP){
+                    flagQ = false;
+                    flagQ = true;
                 }
                 n--;
                 System.out.println(this.getName());
-                wantq = false;
+                flagQ = false;
 
                 System.out.println(n);
             }

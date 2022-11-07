@@ -6,8 +6,8 @@ public class tryThree {
     /**
      * Variabales staticas booleanas
      */
-    public static boolean wantp = false;
-    public static boolean wantq = false;
+    public static boolean flagP = false;
+    public static boolean flagQ = false;
     static int n = 0;
 
     
@@ -18,11 +18,11 @@ public class tryThree {
         public void run() {
             for(int i = 0; i < 100000; i++){
                 //non-critical section
-                wantp = true;
-                while(wantq != false);   
+                flagP = true;
+                while(flagQ != false);   
                 System.out.println(this.getName());
                 n++;          
-                wantp = false;
+                flagP = false;
                 System.out.println(n);
             
             }
@@ -36,11 +36,11 @@ public class tryThree {
         public void run() {
             for(int i = 0; i < 100000; i++){
                 //non-critical section
-                wantq = true;
-                while(wantp != false);
+                flagQ = true;
+                while(flagP != false);
                 System.out.println(this.getName());
                 n--;     
-                wantq = false;
+                flagQ = false;
                 System.out.println(n);
             }
         }
