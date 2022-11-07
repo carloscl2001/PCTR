@@ -1,42 +1,49 @@
 /**
  * tryThree
  */
-public class tryThree extends Thread{
+public class tryThree {
 
-    static bool wantp = false;
-    static bool wantq = false;
+    public static bool wantp = false;
+    public static bool wantq = false;
     
-    Thread h = new tryThree();
-    Thread i = new tryThree();
 
-    public static void main(String[] args) {
-        h.start();
-        i.start();
+    class p extends Thread {
+        public void run() {
+            while(true) {
+                //non-critical section
+                wantp = true;
+                while(wantq == false){
+                    //do nothing
+                }
+                //critical section
+                wantp = false;
+            }
+        }
     }
 
-
-
-    public void run() {
-        while(){
-            //non-critical section
-            wantp = true;
-            while(wantq == false){
-                //do nothing
+    class q extends Thread {
+        public void run() {
+            while(true) {
+                //non-critical section
+                wantq = true;
+                while(wantp == false){
+                    //do nothing
+                }
+                //critical section
+                wantq = false;
             }
-            //critical section
-            wantp = false;
-        }
-    };
-    
 
-    while(){
-        //non-critical section
-        wantq = true;
-        while(wantp == false){
-            //do nothing
         }
-        //critical section
-        wantq = false;
+    }
+
+    
+    public static void main(String[] args) throws Exception {
+        Thread p = new p();
+        Thread q = new q();
+
+        p.start();
+        q.start();
+
     }
 
 
