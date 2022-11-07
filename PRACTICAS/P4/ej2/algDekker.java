@@ -63,6 +63,8 @@ public class algDekker {
         }
     }
 
+
+
     /**
      * Constructor de la clase donde se crean los hilos y se ejecutan
      */
