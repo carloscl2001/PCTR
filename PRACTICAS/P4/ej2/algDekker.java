@@ -1,94 +1,80 @@
-/**
- * @author Carlos Antonio Cortés Lora
- * @version version final de dekker
- */
-public class algDekker {
+public class algDekker extends Thread {
+    /**
+     * Variables estaticas del algorimtmo de dekker
+     */
+    private static volatile int n = 0;
+    private static volatile int turno = 1;
+    private static volatile boolean flag1 = false;
+    private static volatile boolean flag2 = false;
 
     /**
-     * Variabales staticas 
+     * Atributo del hilo que representa el identificador del hilo
      */
-    static boolean flagP = false;
-    static boolean flagQ = false;
-    static int turno = 1;
-    static int n = 0;
-
+    private int tipoHilo;
 
     /**
-     * Codigo que ejecuta el proceso p
+     * Constructor de la clase algDekker
+     * @param tipoHilo
      */
-    class p extends Thread {
-        public void run() {
-            for(int i = 0; i < 10000; i++) {
-                //non-critical section
-                flagP = true;
-                while(flagQ == true){
-                    if(turno == 2){
-                        flagP = false;
-                        while(turno != 1);
-                        flagP = true;
+    public algDekker(int tipoHilo) {
+        this.tipoHilo = tipoHilo;
+    }
+
+    /**
+     * Metodo run de la clase
+     */
+    public void run() {
+
+        //en caso de que el hilo sea 1 sumara a la variable n
+        if(tipoHilo == 1) {
+            while(true) {
+                flag1 = true;
+                while (flag2 == true) {
+                    if (turno == 2) {
+                        flag1 = false;
+                        while (turno != 1);
+                        flag1 = true;
                     }
                 }
-                System.out.println(this.getName());
+                System.out.println("Identificador: " + getName());
                 n++;
-                System.out.println(n);
+                System.out.println("n: " + n);
                 turno = 2;
-                flagP = false;
+                flag1 = false;
+
             }
-        }
-    }
-
-
-    /**
-     * Codigo que ejecuta el proceso q
-     */
-    class q extends Thread {
-        public void run() {
-            for(int i = 0; i < 10000; i++){
-                //non-critical section
-                flagQ = true;
-                while(flagP == true){
-                    if(turno == 1){
-                        flagQ = false;
-                        while(turno != 2);
-                        flagQ = true;
+        } else{
+            //en caso de que el hilo sea 2 restara a la variable n
+            while(true) {
+                flag2 = true;
+                while (flag1 == true) {
+                    if (turno == 1) {
+                        flag2 = false;
+                        while (turno != 2);
+                        flag2 = true;
                     }
                 }
-                System.out.println(this.getName());
+                System.out.println("Identificador: " + getName());
                 n--;
-                System.out.println(n);
+                System.out.println("n: " + n);
                 turno = 1;
-                flagQ = false;
+                flag2 = false;
             }
-
         }
     }
 
-
-
     /**
-     * Constructor de la clase donde se crean los hilos y se ejecutan
-     */
-    public algDekker() throws Exception{
-        System.out.println("Inicio");
-        Thread p = new p();
-        Thread q = new q();
-
-        p.start();
-        q.start();
-
-        p.join();
-        q.join();
-
-        System.out.println("Fin");	
-        System.out.println(n);
-    }
-
-    /**
-     * Main del ejercicio 
+     * Metodo main de la clase
      * @param args
-     * @throws Exception
      */
-    public static void main(String[] args) throws Exception {
-        new algDekker();
+    public static void main(String[] args) throws InterruptedException {
+        algDekker h1 = new algDekker(1);
+        algDekker h2 = new algDekker(2);
+
+        h1.start();
+        h2.start();
+        h1.join();
+        h2.join();
+        System.out.println("Valor de n: " + n);
     }
 }
