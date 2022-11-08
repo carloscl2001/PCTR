@@ -2,7 +2,7 @@
  * @author Carlos Antonio Cortés Lora
  * @version tercer intento de dekker
  */
-public class tryThree {
+public class tryThree extends Thread {
     /**
      * Variabales staticas booleanas
      */
@@ -10,56 +10,48 @@ public class tryThree {
     public static boolean flagQ = false;
     static int n = 0;
 
+    /**
+     * Atributo del hilo que representa el identificador del hilo
+     */
+    public static int idHilo;
     
     /**
-     * Codigo que ejecuta el proceso p
+     * Constructor de la clase tryThree
      */
-    class p extends Thread {
-        public void run() {
-            for(int i = 0; i < 100000; i++){
-                //non-critical section
-                flagP = true;
-                while(flagQ != false);   
-                System.out.println(this.getName());
-                n++;          
-                flagP = false;
-                System.out.println(n);
-            
-            }
-        }
+    public tryThree(int id){
+        idHilo = id;
     }
+    
 
     /**
-     * Codigo que ejecuta el proceso q
+     * Metodo run de la clase
      */
-    class q extends Thread {
-        public void run() {
-            for(int i = 0; i < 100000; i++){
+    public void run() {
+
+        //en caso de que el hilo sea 1 sumara a la variable n
+        if(idHilo == 1) {
+            while(true){
+                //non-critical section
+                flagP = true;
+                while(flagQ != false);
+                System.out.println(this.getName());
+                n++;
+                System.out.println(n);     
+                flagP = false;
+                
+            }
+        } else{
+            //en caso de que el hilo sea 2 restara a la variable n
+            while(true) {
                 //non-critical section
                 flagQ = true;
                 while(flagP != false);
                 System.out.println(this.getName());
-                n--;     
+                n--;
+                System.out.println(n);     
                 flagQ = false;
-                System.out.println(n);
             }
         }
-    }
-    
-    /**
-     * Constructor de la clase donde se crean los hilos y se ejecutan
-     */
-    public tryThree() throws Exception{
-
-        Thread p1 = new p();
-        Thread q1 = new q();
-
-        p1.start();
-        q1.start();
-
-        p1.join();
-        q1.join();
-    
     }
      
     /**
@@ -68,6 +60,13 @@ public class tryThree {
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
-        new tryThree();
+        Thread h1 = new tryThree(1);
+        Thread h2 = new tryThree(2);
+
+        h1.start();
+        h2.start();
+
+        h1.join();
+        h2.join();
     }
 }

@@ -1,4 +1,9 @@
+/**
+ * @author Carlos Antonio Cortés Lora
+ * @version tercer intento de dekker
+ */
 public class algDekker extends Thread {
+    
     /**
      * Variables estaticas del algorimtmo de dekker
      */
@@ -28,6 +33,7 @@ public class algDekker extends Thread {
         //en caso de que el hilo sea 1 sumara a la variable n
         if(tipoHilo == 1) {
             while(true) {
+                //non-critical section
                 flag1 = true;
                 while (flag2 == true) {
                     if (turno == 2) {
@@ -36,9 +42,11 @@ public class algDekker extends Thread {
                         flag1 = true;
                     }
                 }
+                //critical section
                 System.out.println("Identificador: " + getName());
                 n++;
                 System.out.println("n: " + n);
+
                 turno = 2;
                 flag1 = false;
 
@@ -46,6 +54,8 @@ public class algDekker extends Thread {
         } else{
             //en caso de que el hilo sea 2 restara a la variable n
             while(true) {
+                //non-critical section
+
                 flag2 = true;
                 while (flag1 == true) {
                     if (turno == 1) {
@@ -54,22 +64,25 @@ public class algDekker extends Thread {
                         flag2 = true;
                     }
                 }
+                //critical section
                 System.out.println("Identificador: " + getName());
                 n--;
                 System.out.println("n: " + n);
+
                 turno = 1;
                 flag2 = false;
             }
         }
     }
 
+    
     /**
      * Metodo main de la clase
      * @param args
      */
     public static void main(String[] args) throws InterruptedException {
-        algDekker h1 = new algDekker(1);
-        algDekker h2 = new algDekker(2);
+        Thread h1 = new algDekker(1);
+        Thread h2 = new algDekker(2);
 
         h1.start();
         h2.start();
