@@ -3,13 +3,13 @@
  * @author Carlos Antonio Cortés Lora
  * @version secuencial
  */
-public class mathVector {
+public class prodMatricesSecuencial {
 
     //Variables estáticas
-    public static int n = 4;
-    public static int m[][] = new int[n][n];
-    public static int v[] = new int[n];
-    public static int r[] = new int[n];
+    public static int n = 3;
+    public static int m1[][] = new int[n][n];
+    public static int m2[][] = new int[n][n];
+    public static int msol[][] = new int[n][n];
 
 
     /**
@@ -24,15 +24,6 @@ public class mathVector {
         }
     }
 
-    /**
-     * Funcion para rellenar un vector con numeros aleatorios
-     * @param v vector a rellenar
-     */
-    public static void rellenarVector(int v[]){
-        for (int i = 0; i < v.length; i++) {
-            v[i] = (int)(Math.random()*10);
-        }
-    }
 
     /**
      * Imprimir por pantalla una matriz
@@ -61,18 +52,21 @@ public class mathVector {
     }
 
     /**
-     *  Funcion para multiplicar una matriz por un vector y guardar el resultado en otro vector
-     * @param m matriz
-     * @param v vector
-     * @param r vector solucion
+     *  Funcion para multiplicar una matriz dos matrices y guardar el resultado en unamatriz
+     * @param m1 matriz
+     * @param m2 matriz
+     * @param msol matriz solucion
      */
-    public static void multiplicarMatrizVector(int m[][], int v[], int r[]){
-        for (int i = 0; i < m.length; i++) {
-            for (int j = 0; j < m[i].length; j++) {
-                r[i] += m[i][j] * v[j];
+    public static void productoMatrices(int m1[][], int m2[][], int msol[][]){
+        for (int i = 0; i < m1.length; i++) {
+            for (int j = 0; j < m2[i].length; j++) {
+                for (int k = 0; k < m1[i].length; k++) {
+                    msol[i][j] += m1[i][k] * m2[k][j];
+                }
             }
         }
     }
+    
 
     /**
      * Main del ejercicio de la version secuencial
@@ -80,16 +74,17 @@ public class mathVector {
      * @throws Exception
      */
     public static void main(String[] args) throws Exception{
-        rellenarMatriz(m);
-        rellenarVector(v);
+        rellenarMatriz(m1);
+        rellenarMatriz(m2);
 
-        imprimirMatriz(m);
+        imprimirMatriz(m1);
+        imprimirMatriz(m2);
+
         System.out.println("\n");
-        imprimirVector(v);
-
-        multiplicarMatrizVector(m, v, r);
+        
+        productoMatrices(m1, m2, msol);
 
         System.out.println("\n\tRESULTADO ");
-        imprimirVector(r);
+        imprimirMatriz(msol);
     }
 }
