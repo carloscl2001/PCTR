@@ -1,8 +1,10 @@
+import java.util.concurrent.*;
+
 /**
  * @author Carlos Antonio Cortés Lora
  * @version algo de peterson
  */
-public class algPeterson extends Thread{
+public class algPeterson implements Runnable{
     /**
      * Varibales estáticas
      */
@@ -32,26 +34,35 @@ public class algPeterson extends Thread{
         switch (tipoHilo) {
           case 1: {
             for (int i = 0; i < nVueltas; i++) { //while(true)  ==> Para comprobar limitamos a 1000 iteraciones
-              C1 = true;
-              last = 1;
-              while (C2 && last == 1){};
-              n++;
-              C1 = false;
-              System.out.println("Valor de n: "+ n);
-              System.out.println(Thread.currentThread().getName());
+                //seccion no critica
+                C1 = true;
+                last = 1;
+                while (C2 && last == 1){};
+
+                //seccion critica
+                n++;
+                System.out.println("Valor de n: "+ n);
+                System.out.println(Thread.currentThread().getName());
+
+                C1 = false;
              
             }
             break;
           }
           case 2: {
               for (int i = 0; i < nVueltas; i++) { //while(true)  ==> Para comprobar limitamos a 1000 iteraciones
-                  C2 = true;
-                  last = 2;
-                  while (C1 && last == 2){};
-                  n--; 
-                  C2 = false;
-                  System.out.println("Valor de n: "+ n);
-                  System.out.println(Thread.currentThread().getName());
+                //seccion no critica  
+                C2 = true;
+                last = 2;
+                while (C1 && last == 2){};
+
+                //seccion critica
+                n--; 
+                System.out.println("Valor de n: "+ n);
+                System.out.println(Thread.currentThread().getName());
+                  
+                C2 = false;
+                  
             }
             break;
           
@@ -65,13 +76,11 @@ public class algPeterson extends Thread{
      * @param args
      */
     public static void main(String[] args) throws InterruptedException {
-        Thread h1 = new algPeterson(1);
-        Thread h2 = new algPeterson(2);
-
-        h1.start();
-        h2.start();
-        h1.join();
-        h2.join();
+         
+        ExecutorService executor = Executors.newFixedThreadPool(2);
+        executor.execute(new algPeterson(1));
+        executor.execute(new algPeterson(2));
+        executor.shutdown();
         System.out.println("Valor de n: " + n);
     }
 }
