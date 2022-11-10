@@ -1,7 +1,5 @@
 import java.util.concurrent.*;
 
-import javax.swing.event.TableModelEvent;
-
 /**
  * Clase para realizar el producto de una matriz por un vector de manera concurrente
  * @author Carlos Antonio Cortés Lora
@@ -10,7 +8,7 @@ import javax.swing.event.TableModelEvent;
 public class prodMatricesParalelo implements Runnable{
     
     //Variables estáticas
-    public static int n = 3;
+    public static int n = 16;
     public static int m1[][] = new int[n][n];
     public static int m2[][] = new int[n][n];
     public static int msol[][] = new int[n][n];
@@ -68,14 +66,10 @@ public class prodMatricesParalelo implements Runnable{
      */
     @Override
     public void run(){
-        //multpilicar dos matrices de nxn
-        for (int i = inferior; i < superior; i++) {
-            for (int j = 0; j < n; j++) {
-                for (int k = 0; k < n; k++) {
-                    msol[i][j] += m1[i][k] * m2[k][j];
-                }
-            }
+        for(int i = 0; i < n; i++){
+            msol[inferior][superior] = 1;
         }
+        System.out.println("Hebra " + Thread.currentThread().getName() + " ejecutandose");
     }
 
 
@@ -88,19 +82,25 @@ public class prodMatricesParalelo implements Runnable{
         rellenarMatriz(m1);
         rellenarMatriz(m2);
 
-        imprimirMatriz(m1);
-        imprimirMatriz(m2);
+        //imprimirMatriz(m1);
+        //imprimirMatriz(m2);
         
         subramanian(0);
         int TamVentana = n/subramanian;
+        System.out.println("n: " + n);
+        System.out.println("subrmaian: " + subramanian);
+        System.out.println("TamVentana: " + TamVentana);
         
         ExecutorService executor = Executors.newFixedThreadPool(subramanian);
         for(int i = 0; i < subramanian; i++){
-            Runnable worker = new prodMatricesParalelo(i * TamVentana, (i+1) * TamVentana);
+            executor.execute(new prodMatricesParalelo(i * TamVentana, (i+1) * TamVentana));
+        
         }
         executor.shutdown();
+        while(!executor.isTerminated());
+        
 
+        System.out.println("Fin del programa");
         imprimirMatriz(msol);
-
     }
 }
