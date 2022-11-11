@@ -1,4 +1,4 @@
-package ej1;
+
 /*@PrimosSecuencial
  *@ A.T:
 */
@@ -18,7 +18,7 @@ package ej1;
     long inicTiempo = System.nanoTime();
     for(long i=0; i<=intervalo;i++)
       if(esPrimo(i)) total++;
-    long tiempoTotal = (System.nanoTime()-inicTiempo)/(long)1.0e9;
-    System.out.println("Encontrados "+total+" primos"+" en "+ tiempoTotal+" segundos");
+    long tiempoTotal = (System.nanoTime()-inicTiempo)/(long)1.0e6;
+    System.out.println("Encontrados "+total+" primos"+" en "+ tiempoTotal+" ms");
   }
 }

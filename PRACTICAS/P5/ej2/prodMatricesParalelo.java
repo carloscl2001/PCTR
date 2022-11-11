@@ -14,7 +14,7 @@ public class prodMatricesParalelo implements Runnable{
     public static int msol[][] = new int[n][n];
     public static int subramanian = subramanian(0);
     
-
+    //Atributos de la clase
     public int lInf;
     public int lSup;
 

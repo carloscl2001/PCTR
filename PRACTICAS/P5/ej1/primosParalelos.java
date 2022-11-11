@@ -14,25 +14,30 @@ public class primosParalelos {
     
     List<Future<Long>> contParciales = Collections.synchronizedList(
       new ArrayList<Future<Long>>());
+
     long inicTiempo = System.nanoTime();  
+
     ThreadPoolExecutor ept = new ThreadPoolExecutor(
       nTareas,
       nTareas,
       0L,
       TimeUnit.MILLISECONDS,
       new LinkedBlockingQueue<Runnable>());
+
     for(int i=0; i<nTareas; i++){
       contParciales.add(ept.submit(
       	 new tareaPrimos(linf, lsup)));
       linf=lsup+1;
       lsup+=tVentana;
     }  
+
     for(Future<Long> iterador:contParciales)
       try{
       	  primosTotal +=  iterador.get(); 
       }catch (CancellationException e){}
        catch (ExecutionException e){}
-       catch (InterruptedException e){}     
+       catch (InterruptedException e){}   
+         
     long tiempoTotal = (System.nanoTime()-inicTiempo)/(long)1.0e9;   
     ept.shutdown();
     System.out.println("Primos hallados: "+primosTotal);
