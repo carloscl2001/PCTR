@@ -6,7 +6,7 @@ public class primosParalelos {
 
   public static void main(String[] args) throws Exception {
     long nPuntos     = Integer.parseInt(args[0]);
-    int  nTareas     = Runtime.getRuntime().availableProcessors();
+    int  nTareas     = 1;
     long tVentana    = nPuntos/nTareas;
     long primosTotal = 0;
     long linf        = 0;
@@ -15,8 +15,8 @@ public class primosParalelos {
     List<Future<Long>> contParciales = Collections.synchronizedList(
       new ArrayList<Future<Long>>());
 
-    long inicTiempo = System.nanoTime();  
-
+    long startTime = System.nanoTime(); 
+    
     ThreadPoolExecutor ept = new ThreadPoolExecutor(
       nTareas,
       nTareas,
@@ -30,6 +30,7 @@ public class primosParalelos {
       linf=lsup+1;
       lsup+=tVentana;
     }  
+    long endTime = System.nanoTime();
 
     for(Future<Long> iterador:contParciales)
       try{
@@ -37,10 +38,8 @@ public class primosParalelos {
       }catch (CancellationException e){}
        catch (ExecutionException e){}
        catch (InterruptedException e){}   
-         
-    long tiempoTotal = (System.nanoTime()-inicTiempo)/(long)1.0e9;   
+          
     ept.shutdown();
-    System.out.println("Primos hallados: "+primosTotal);
-    System.out.println("Calculo finalizado en "+tiempoTotal+" segundos");
+    System.out.println("Duración: " + (endTime-startTime)/1e6 + " ms" + "Primos hallados: "+ primosTotal);
  }   
 }
