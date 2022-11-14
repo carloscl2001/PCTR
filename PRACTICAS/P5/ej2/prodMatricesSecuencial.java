@@ -6,7 +6,7 @@
 public class prodMatricesSecuencial {
 
     //Variables estáticas
-    public static int n = 3;
+    public static int n = 10000;
     public static int m1[][] = new int[n][n];
     public static int m2[][] = new int[n][n];
     public static int msol[][] = new int[n][n];
@@ -24,32 +24,7 @@ public class prodMatricesSecuencial {
         }
     }
 
-
-    /**
-     * Imprimir por pantalla una matriz
-     * @param m matriz a imprimir
-     */
-    public static void imprimirMatriz(int m[][]){
-        System.out.println("Matriz: ");
-        for (int i = 0; i < m.length; i++) {
-            for (int j = 0; j < m[i].length; j++) {
-                System.out.print(m[i][j] + " ");
-            }
-            System.out.println();
-        }
-    }
-
-    /**
-     * Imprimir por pantalla un vector
-     * @param v vector a imprimir
-     */
-    public static void imprimirVector(int v[]){
-        System.out.println("Vector: ");
-        for (int i = 0; i < v.length; i++) {
-            System.out.print(v[i] + " ");
-        }
-        System.out.println();
-    }
+    
 
     /**
      *  Funcion para multiplicar una matriz dos matrices y guardar el resultado en unamatriz
@@ -77,14 +52,13 @@ public class prodMatricesSecuencial {
         rellenarMatriz(m1);
         rellenarMatriz(m2);
 
-        imprimirMatriz(m1);
-        imprimirMatriz(m2);
+      
 
         System.out.println("\n");
-        
+        long iniTiempo = System.nanoTime();
         productoMatrices(m1, m2, msol);
-
+        long finTiempo = System.nanoTime();
+        System.out.println("Tiempo Total (ns): "+ (finTiempo - iniTiempo));   
         System.out.println("\n\tRESULTADO ");
-        imprimirMatriz(msol);
     }
 }

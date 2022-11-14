@@ -8,7 +8,7 @@ import java.util.concurrent.*;
 public class prodMatricesParalelo implements Runnable{
     
     //Variables estáticas
-    public static int n = 12;
+    public static int n = 1000;
     public static int m1[][] = new int[n][n];
     public static int m2[][] = new int[n][n];
     public static int msol[][] = new int[n][n];
@@ -43,7 +43,7 @@ public class prodMatricesParalelo implements Runnable{
     //funcion para hallar la euacion de Subramanian
     public static int subramanian(int  cb){
         int nt = 0;
-        int nc = Runtime.getRuntime().availableProcessors();
+        int nc = 20;//Runtime.getRuntime().availableProcessors();
         nt  = nc/(1-cb);
         return nt;
     }
@@ -75,7 +75,8 @@ public class prodMatricesParalelo implements Runnable{
         rellenarMatriz(m1);
         rellenarMatriz(m2);
 
-
+        long iniTiempo = 0;
+        long finTiempo = 0;
         
         subramanian(0);
         int TamVentana = n/subramanian;
@@ -85,13 +86,16 @@ public class prodMatricesParalelo implements Runnable{
         
         ExecutorService executor = Executors.newFixedThreadPool(subramanian);
         for(int i = 0; i < subramanian; i++){
+            iniTiempo = System.nanoTime();
             executor.execute(new prodMatricesParalelo(i * TamVentana, (i+1) * TamVentana));
-        
+            finTiempo = System.nanoTime();
         }
         executor.shutdown();
         while(!executor.isTerminated());
         
+        
 
         System.out.println("Fin del programa");
+        System.out.println("Tiempo Total (nanos): "+(finTiempo - iniTiempo));     
     }
 }
