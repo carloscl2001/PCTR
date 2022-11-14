@@ -43,7 +43,7 @@ public class prodMatricesParalelo implements Runnable{
     //funcion para hallar la euacion de Subramanian
     public static int subramanian(int  cb){
         int nt = 0;
-        int nc = 20;//Runtime.getRuntime().availableProcessors();
+        int nc = 12;//Runtime.getRuntime().availableProcessors();
         nt  = nc/(1-cb);
         return nt;
     }
@@ -58,6 +58,7 @@ public class prodMatricesParalelo implements Runnable{
                 for (int k = 0; k < m2.length; k++) {
                     for (int l = 0; l < m2.length; l++) {
                         msol[k][l] += m1[i][j] * m2[i][j];
+                        //System.out.println("Hebra: " + Thread.currentThread().getName() + " i: " + i + " j: " + j + " k: " + k + " l: " + l);
                     }
                 }
             }
