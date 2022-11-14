@@ -19,6 +19,8 @@
     for(long i=0; i<=intervalo;i++)
       if(esPrimo(i)) total++;
     long tiempoTotal = (System.nanoTime()-inicTiempo)/(long)1.0e6;
+    System.out.println("Total de primos: "+total);
+    System.out.println("Tiempo total: "+tiempoTotal+" ms");
    
   }
 }

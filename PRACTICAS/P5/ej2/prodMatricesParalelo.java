@@ -8,7 +8,7 @@ import java.util.concurrent.*;
 public class prodMatricesParalelo implements Runnable{
     
     //Variables estáticas
-    public static int n = 10000;
+    public static int n = 2000;
     public static int m1[][] = new int[n][n];
     public static int m2[][] = new int[n][n];
     public static int msol[][] = new int[n][n];
@@ -32,8 +32,8 @@ public class prodMatricesParalelo implements Runnable{
      * @param m matriz a rellenar
     */
     public static void rellenarMatriz(int m[][]){
-        for (int i = 0; i < m.length; i++) {
-            for (int j = 0; j < m[i].length; j++) {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
                 m[i][j] = (int)(Math.random()*10);
             }
         }
@@ -54,12 +54,8 @@ public class prodMatricesParalelo implements Runnable{
     @Override
     public  void run(){
         for (int i = lInf; i < lSup; i++) {
-            for (int j = 0; j < m1.length; j++) {
-                for (int k = lInf; k < lSup; k++) {
-                    for (int l = 0; l < m2.length; l++) {
-                        msol[k][l] += m1[i][j] * m2[i][j];
-                    }
-                }
+            for (int j = 0; j < m1.length; j++) {   
+                msol[i][j] += m1[i][j] * m2[i][j];
             }
         }
     }
@@ -95,6 +91,6 @@ public class prodMatricesParalelo implements Runnable{
         
 
         System.out.println("Fin del programa");
-        System.out.println("Tiempo Total (nanos): "+(finTiempo - iniTiempo));     
+        System.out.println("Tiempo Total (ms): "+(finTiempo - iniTiempo)/1.0e6);     
     }
 }

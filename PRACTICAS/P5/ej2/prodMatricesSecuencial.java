@@ -6,7 +6,7 @@
 public class prodMatricesSecuencial {
 
     //Variables estáticas
-    public static int n = 10000;
+    public static int n = 2000;
     public static int m1[][] = new int[n][n];
     public static int m2[][] = new int[n][n];
     public static int msol[][] = new int[n][n];
@@ -52,13 +52,11 @@ public class prodMatricesSecuencial {
         rellenarMatriz(m1);
         rellenarMatriz(m2);
 
-      
-
         System.out.println("\n");
         long iniTiempo = System.nanoTime();
         productoMatrices(m1, m2, msol);
         long finTiempo = System.nanoTime();
-        System.out.println("Tiempo Total (ns): "+ (finTiempo - iniTiempo));   
+        System.out.println("Tiempo Total (s): "+ (finTiempo - iniTiempo)/1.0e9);   
         System.out.println("\n\tRESULTADO ");
     }
 }

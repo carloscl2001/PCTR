@@ -4,7 +4,7 @@ public class resImagenPar implements Runnable {
     /**
      * Variable estatica para el tamaño de la matriz
      */
-    public static final int TAM = 10000000;
+    public static final int TAM = 9000;
 
     /**
      * Variable estatica para la matriz de entrada
@@ -19,7 +19,7 @@ public class resImagenPar implements Runnable {
     /**
      * Variable estatica para el numero de hilos
      */
-    public static int subramanian = Runtime.getRuntime().availableProcessors();
+    public static int subramanian = 6;//Runtime.getRuntime().availableProcessors();
 
     /**
      * Atributo que represenata el limite inferior
@@ -54,25 +54,14 @@ public class resImagenPar implements Runnable {
     }
 
     /**
-     * Funcion para imprimir la matriz
-     * @param m matriz
+     * Sobrecarga del metodo run
      */
-    public static void imprimirMatriz(int[][] m){
-        for (int i = 0; i < m.length; i++) {
-            for (int j = 0; j < m[i].length; j++) {
-                System.out.print(m[i][j] + " ");
-            }
-            System.out.println();
-        }
-    }
-
-
     public void run(){
         for(int i = lInf; i < lSup; ++i){
             for(int j = 0; j < TAM; ++j)
             {
                 msol[i][j] =  4 * m[i][j];
-                
+
                 //Arrriba
                 if( i + 1 < TAM ) msol[i][j] -= m[i + 1][j];
                 //Abajo
@@ -87,7 +76,13 @@ public class resImagenPar implements Runnable {
         }   
     }
 
+    /**
+     * Main del ejercicio
+     * @param args
+     */
     public static void main(String[] args) {
+
+        long inicTiempo = 0;
         //Definimos el tamaño de la ventana
         int TamVentana  = TAM/subramanian;
 
@@ -97,9 +92,12 @@ public class resImagenPar implements Runnable {
         ExecutorService executor = Executors.newFixedThreadPool(subramanian);
         for(int i = 0; i < subramanian; i++)
         {
+            inicTiempo = System.nanoTime();
             executor.execute(new resImagenPar(TamVentana * i, TamVentana * (i+1)));
         }
         executor.shutdown();
         while(!executor.isTerminated());
+        long tiempoTotal = (System.nanoTime()-inicTiempo)/(long)1.0e6;
+        System.out.println("Tiempo total: "+tiempoTotal+" ms");
     }
 }

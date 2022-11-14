@@ -2,7 +2,7 @@ import java.util.*;
 public class resImagen {
 
     //Variables estáticas
-    public static int n = 3;
+    public static int n = 9000;
     public static int m[][] = new int[n][n];
 
     /**
@@ -27,7 +27,7 @@ public class resImagen {
             for(int j = 0; j < n; ++j)
             {
                 m[i][j] =  4 * m[i][j];
-                
+
                 //Arriba
                 if( i + 1 < n ) m[i][j] -= m[i + 1][j];
                 //Abajo
@@ -42,25 +42,18 @@ public class resImagen {
         }   
     }
     
+   
     /**
-     * Funcion para mostrar la matriz por pantalla
-     * @param m matriz
+     * Main del ejercicio
+     * @param args
      */
-    public static void mostrarMatriz(int[][] m) {
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                System.out.print(m[i][j] + " ");
-            }
-            System.out.println();
-        }
-    }
-
     public static void main(String[] args) {
         //funcion para rellenar la matriz de forma aleatoria    
         rellenarMatriz(m);
-        mostrarMatriz(m);
+        long inicTiempo = System.nanoTime();
         resal(m);
+        long tiempoTotal = (System.nanoTime()-inicTiempo)/(long)1.0e6;
         System.out.println("Matriz resaltada");
-        mostrarMatriz(m);
+        System.out.println("Tiempo total: "+tiempoTotal+" ms");
     }
 }
