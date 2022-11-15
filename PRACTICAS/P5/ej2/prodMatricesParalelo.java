@@ -14,8 +14,14 @@ public class prodMatricesParalelo implements Runnable{
     public static int msol[][] = new int[n][n];
     public static int subramanian = subramanian(0);
     
-
+    /**
+     * Atributo que representa el limite inferior
+     */
     public int inferior;
+
+    /**
+     * Atributo que representa el limite superior
+     */
     public int superior;
 
     /**
