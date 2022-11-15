@@ -10,7 +10,7 @@ public class prodMatricesParalelo implements Runnable{
     /**
      * Variable estatica
      */
-    public static int N = 16;
+    public static int N = 2000;
 
     /**
      * Variable estatica que representa la primera matriz

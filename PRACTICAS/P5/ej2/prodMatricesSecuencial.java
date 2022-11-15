@@ -5,12 +5,25 @@
  */
 public class prodMatricesSecuencial {
 
-    //Variables estáticas
+    /**
+     * Variable estatica
+     */
     public static int n = 2000;
-    public static int m1[][] = new int[n][n];
-    public static int m2[][] = new int[n][n];
-    public static int msol[][] = new int[n][n];
 
+    /**
+     * Variable estatica que representa la primera matriz
+     */
+    public static int m1[][] = new int[n][n];
+
+    /**
+     * Variable estatica que representa la segunda matriz
+     */
+    public static int m2[][] = new int[n][n];
+
+    /**
+     * Variable estatica que representa la matriz solucion
+     */
+    public static int msol[][] = new int[n][n];
 
     /**
      * Funcion para rellenar una matriz con numeros aleatorios
@@ -22,9 +35,7 @@ public class prodMatricesSecuencial {
                 m[i][j] = (int)(Math.random()*10);
             }
         }
-    }
-
-    
+    }   
 
     /**
      *  Funcion para multiplicar una matriz dos matrices y guardar el resultado en unamatriz
@@ -42,7 +53,6 @@ public class prodMatricesSecuencial {
         }
     }
     
-
     /**
      * Main del ejercicio de la version secuencial
      * @param args
@@ -52,11 +62,6 @@ public class prodMatricesSecuencial {
         rellenarMatriz(m1);
         rellenarMatriz(m2);
 
-        System.out.println("\n");
-        long iniTiempo = System.nanoTime();
-        productoMatrices(m1, m2, msol);
-        long finTiempo = System.nanoTime();
-        System.out.println("Tiempo Total (s): "+ (finTiempo - iniTiempo)/1.0e9);   
-        System.out.println("\n\tRESULTADO ");
+        productoMatrices(m1, m2, msol);        
     }
 }
