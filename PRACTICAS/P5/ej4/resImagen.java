@@ -1,4 +1,10 @@
 import java.util.*;
+
+/**
+ * Clase para realizar el resaltado de una imagen
+ * @author Carlos Antonio Cortés Lora
+ * @version concurrente
+ */
 public class resImagen {
 
     /**
