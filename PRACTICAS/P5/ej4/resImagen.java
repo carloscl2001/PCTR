@@ -1,8 +1,14 @@
 import java.util.*;
 public class resImagen {
 
-    //Variables estáticas
+    /**
+     * Variable estatica para el tamaño de la matriz
+     */
     public static int n = 9000;
+
+    /**
+     * Variable estatica para la matriz de entrada
+     */
     public static int m[][] = new int[n][n];
 
     /**
@@ -48,12 +54,7 @@ public class resImagen {
      * @param args
      */
     public static void main(String[] args) {
-        //funcion para rellenar la matriz de forma aleatoria    
         rellenarMatriz(m);
-        long inicTiempo = System.nanoTime();
         resal(m);
-        long tiempoTotal = (System.nanoTime()-inicTiempo)/(long)1.0e6;
-        System.out.println("Matriz resaltada");
-        System.out.println("Tiempo total: "+tiempoTotal+" ms");
     }
 }

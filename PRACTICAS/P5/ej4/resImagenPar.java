@@ -82,7 +82,6 @@ public class resImagenPar implements Runnable {
      */
     public static void main(String[] args) {
 
-        long inicTiempo = 0;
         //Definimos el tamaño de la ventana
         int TamVentana  = TAM/subramanian;
 
@@ -92,12 +91,9 @@ public class resImagenPar implements Runnable {
         ExecutorService executor = Executors.newFixedThreadPool(subramanian);
         for(int i = 0; i < subramanian; i++)
         {
-            inicTiempo = System.nanoTime();
             executor.execute(new resImagenPar(TamVentana * i, TamVentana * (i+1)));
         }
         executor.shutdown();
-        while(!executor.isTerminated());
-        long tiempoTotal = (System.nanoTime()-inicTiempo)/(long)1.0e6;
-        System.out.println("Tiempo total: "+tiempoTotal+" ms");
+        while(!executor.isTerminated());   
     }
 }
