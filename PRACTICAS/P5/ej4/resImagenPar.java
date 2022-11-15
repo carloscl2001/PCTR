@@ -23,7 +23,7 @@ public class resImagenPar implements Runnable {
     /**
      * Variable estatica para el numero de hilos
      */
-    public static int subramanian = 6;//Runtime.getRuntime().availableProcessors();
+    public static int subramanian = Runtime.getRuntime().availableProcessors();
 
     /**
      * Atributo que represenata el limite inferior
