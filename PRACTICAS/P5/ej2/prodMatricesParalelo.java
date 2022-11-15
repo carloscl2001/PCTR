@@ -8,23 +8,23 @@ import java.util.concurrent.*;
 public class prodMatricesParalelo implements Runnable{
     
     //Variables estáticas
-    public static int n = 2000;
+    public static int n = 16;
     public static int m1[][] = new int[n][n];
     public static int m2[][] = new int[n][n];
     public static int msol[][] = new int[n][n];
     public static int subramanian = subramanian(0);
     
-    //Atributos de la clase
-    public int lInf;
-    public int lSup;
+
+    public int inferior;
+    public int superior;
 
     /**
      * Constructor de la clase
      * @param idHebra identificador de la hebra
      */
     public prodMatricesParalelo(int i, int s){
-        lInf = i;
-        lSup = s;
+        inferior = i;
+        superior = s;
     }
 
     /**
@@ -32,13 +32,26 @@ public class prodMatricesParalelo implements Runnable{
      * @param m matriz a rellenar
     */
     public static void rellenarMatriz(int m[][]){
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
+        for (int i = 0; i < m.length; i++) {
+            for (int j = 0; j < m[i].length; j++) {
                 m[i][j] = (int)(Math.random()*10);
             }
         }
     }
 
+    /**
+     * Imprimir por pantalla una matriz
+     * @param m matriz a imprimir
+     */
+    public static void imprimirMatriz(int m[][]){
+        System.out.println("Matriz: ");
+        for (int i = 0; i < m.length; i++) {
+            for (int j = 0; j < m[i].length; j++) {
+                System.out.print(m[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
 
     //funcion para hallar la euacion de Subramanian
     public static int subramanian(int  cb){
@@ -52,12 +65,11 @@ public class prodMatricesParalelo implements Runnable{
      * Sobrecarga de metodo run
      */
     @Override
-    public  void run(){
-        for (int i = lInf; i < lSup; i++) {
-            for (int j = 0; j < m1.length; j++) {   
-                msol[i][j] += m1[i][j] * m2[i][j];
-            }
+    public void run(){
+        for(int i = 0; i < n; i++){
+            msol[inferior][superior] = 1;   
         }
+        System.out.println("Hebra " + Thread.currentThread().getName() + " ejecutandose");
     }
 
 
@@ -70,8 +82,8 @@ public class prodMatricesParalelo implements Runnable{
         rellenarMatriz(m1);
         rellenarMatriz(m2);
 
-        long iniTiempo = 0;
-        long finTiempo = 0;
+        //imprimirMatriz(m1);
+        //imprimirMatriz(m2);
         
         subramanian(0);
         int TamVentana = n/subramanian;
@@ -81,16 +93,13 @@ public class prodMatricesParalelo implements Runnable{
         
         ExecutorService executor = Executors.newFixedThreadPool(subramanian);
         for(int i = 0; i < subramanian; i++){
-            iniTiempo = System.nanoTime();
             executor.execute(new prodMatricesParalelo(i * TamVentana, (i+1) * TamVentana));
-            finTiempo = System.nanoTime();
         }
         executor.shutdown();
         while(!executor.isTerminated());
         
-        
 
         System.out.println("Fin del programa");
-        System.out.println("Tiempo Total (ms): "+(finTiempo - iniTiempo)/1.0e6);     
+        imprimirMatriz(msol);
     }
 }
