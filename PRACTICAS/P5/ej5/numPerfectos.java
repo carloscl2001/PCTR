@@ -36,8 +36,8 @@ public class numPerfectos {
                 System.out.println(i);
             }
         }
-            
-        long tiempoTotal = (System.nanoTime()-inicTiempo)/(long)1.0e3;
-        System.out.println("Encontrados " + total + " perfectos" + " en " + tiempoTotal + " msegundos");
+        System.out.println("Perfectos encontrados -> " + total);
+        float tiempoTotal = (System.nanoTime()-inicTiempo)/(float)1.0e9;
+        System.out.println("Encontrados  en " + tiempoTotal + " segundos");
     }   
 }

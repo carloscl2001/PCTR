@@ -89,6 +89,7 @@ public class resImagenPar implements Runnable {
         //Definimos el tamaño de la ventana
         int TamVentana  = TAM/subramanian;
 
+        //Rellenamos la matriz
         rellenarMatriz(m);
 
         //Pool de threads
