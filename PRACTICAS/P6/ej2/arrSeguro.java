@@ -1,3 +1,3 @@
-public class arrSeguro {
+public class arrSeguro extends Thread{
     
 }
