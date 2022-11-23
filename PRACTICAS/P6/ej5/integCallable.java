@@ -1,6 +1,10 @@
 import java.util.concurrent.*;
 import java.util.*;
 
+/**
+ * Clase para el ejercicio 5 de la practica 6
+ * @author Carlos Antonio Cortes Lora
+ */
 public class integCallable implements Callable<Integer> {
 
     /**

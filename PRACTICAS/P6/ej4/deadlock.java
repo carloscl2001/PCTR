@@ -1,3 +1,7 @@
+/**
+ * Clase dek ejericicio 4 de la practica 6
+ * @author Carlos Antonio Cortes Lora
+ */
 public class deadlock {
     public static void main(String[] args){
         
@@ -23,7 +27,6 @@ public class deadlock {
             
         Thread Hilo_C = new Thread(new Runnable() {
             public void run() {
-                System.out.println("Hilo_C: Intentando acceder a la region C");
                 synchronized (region_C) {
                     synchronized (region_B) {
                         for (int k = 0; k < 100000; k++) {
@@ -38,7 +41,6 @@ public class deadlock {
         
         Thread Hilo_B = new Thread(new Runnable(){
             public void run() {
-                System.out.println("Hilo B");
                 synchronized (region_B) {
                     synchronized (region_A) {
                         for (int k = 0; k < 100000; k++) {
@@ -53,7 +55,6 @@ public class deadlock {
     
         Thread Hilo_A = new Thread(new Runnable(){
             public void run() {
-                System.out.println("Hilo A");
                 synchronized (region_A) {
                     synchronized (region_B) {
                         for (int k = 0; k < 100000; k++) {
