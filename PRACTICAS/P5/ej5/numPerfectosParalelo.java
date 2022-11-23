@@ -10,7 +10,7 @@ public class numPerfectosParalelo implements Callable<Integer> {
     /**
      * Variable estatica que defiene el valor de la ecuacion subramaninan
      */
-    static int subramanina = 32;//Runtime.getRuntime().availableProcessors();
+    static int subramanina = Runtime.getRuntime().availableProcessors();
 
     /**
      * Atributo que represenata el limite inferior
