@@ -3,21 +3,23 @@
  * @author Carlos Antonio Cortes Lora
  */
 public class heterogenea {
+
+    public static final Object lock = new Object();
     /**
      * Variable estatica que debemos proteger
      */
-    public static int n = 10;
+    public int n = 10;
 
     /**
      * Variable estatica no protegida
      */
-    public static int m = 100;
+    public int m = 100;
 
     /**
      * Metodo protegido para incrementar n
      */
     public void incN() {
-        synchronized(this) {
+        synchronized(lock) {
             n++;
         }
     }
@@ -33,7 +35,7 @@ public class heterogenea {
      * Metodo protegido para decrementar n
      */
     public void decN(){
-        synchronized(this) {
+        synchronized(lock) {
             n--;
         }
     }
@@ -51,7 +53,8 @@ public class heterogenea {
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
-        final heterogenea h = new heterogenea();
+        heterogenea h = new heterogenea();
+        
         Thread t1 = new Thread(new Runnable() {
             public void run() {
                 for (int i = 0; i < 100000; i++) {
@@ -76,8 +79,8 @@ public class heterogenea {
         t1.join();
         t2.join();
         
-        System.out.println("n = " + n);
-        System.out.println("m = " + m);
+        System.out.println("n = " + h.n);
+        System.out.println("m = " + h.m);
     }
 
 }
