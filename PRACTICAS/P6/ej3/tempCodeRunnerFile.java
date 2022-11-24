@@ -1,1 +1,0 @@
-final heterogenea h = new heterogenea();
