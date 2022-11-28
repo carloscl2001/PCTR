@@ -6,12 +6,12 @@ import java.util.concurrent.*;
 public class usaprodCon implements Runnable{
     
     /**
-     * Creamos un monitor
+     * Creamos el monitor
      */
     public static prodCon monitor = new prodCon();
 
     /**
-     * Atributos qur representa el tipo de hilo
+     * Atributos que representa el tipo de hilo
      */
     public int tipoHilo;
 
