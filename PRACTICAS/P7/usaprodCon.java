@@ -30,12 +30,10 @@ public class usaprodCon implements Runnable{
         if(tipoHilo == 0){
            for(int i=0; i<10000; i++){
                 monitor.incBuffer(); 
-                System.out.println("Hilo suma"); 
             }
         }else{
              for(int i=0; i<10000; i++){
                 monitor.decBuffer(); 
-                System.out.println("Hilo resta"); 
             }
         } 
     }
@@ -49,8 +47,9 @@ public class usaprodCon implements Runnable{
 
         //Obtenemos el numero de hilos a crear
         Scanner sc = new Scanner(System.in);
-        System.out.println("Introduce el numero de hilos-> ");
+        System.out.println("Introduce el numero de hilos:");
         int n_Hilos = sc.nextInt();
+        System.out.println("-----------------------------");
 
         //Creamoos y ejecutamos un pool de threads
         ExecutorService executor = Executors.newFixedThreadPool(n_Hilos);
