@@ -1,50 +1,84 @@
 public class prodCon {
     
-    
+    /**
+     * Tamaño del buffer
+     */
+    private int numSlots = 0;
 
-    private int buffer[];
+    /**
+     * Buffer de enteros protegido
+     */
+    private int[] buffer = null;
 
+    /**
+     * Posición de inserción del buffer
+     */
+    private int posInt = 0;
 
-    public prodCon(int buffer[]){
-        this.buffer = buffer;
-        for(int i=0; i<buffer.length; i++){
-            buffer[i]= 5;
-        }
+    /**
+     * Posición de extracción del buffer
+     */
+    private int posOut = 0;
+
+    /**
+     * Número de elementos en el buffer
+     */
+    private int cont = 0;
+
+    /**
+     * Constructor de la clase
+     * @param numSlots
+     */
+    public prodCon(int numSlots) {
+        this.numSlots = numSlots;
+        buffer = new int[numSlots];
     }
 
-
-    public synchronized void producir(){ 
-        System.out.println("Preparado para producir");
-        while(buffer.length != 0){
-            try{wait();} 
-            catch(InterruptedException e){}
+    /**
+     * Método que inserta un entero en el buffer
+     * @param valor a insertar en el buffer
+     */
+    public synchronized void producir(int valor){ 
+        //condicion de guarda
+        while (cont == numSlots) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
-        System.out.println("N-> " + buffer.length);
-        buffer.length++;
-        System.out.println("N-> " + buffer.length);
-        System.out.println("Producido");
+        buffer[posInt] = valor;
+        posInt = (posInt + 1) % numSlots;
+        cont++;
         notifyAll();
     }
 
-    public synchronized void consumir(){
-        System.out.println("Preparado para consumir");
-        while(buffer.length <= 0){
-            try{wait();}
-            catch(InterruptedException e){}
+    /**
+     * Método que extrae un entero del buffer
+     * @return valor del buffer
+     */
+    public synchronized int consumir(){
+        int valor;
+        while(cont == 0){
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
-        System.out.println("N-> " + buffer.length);
-        buffer.length--;
-        System.out.println("N-> " + buffer.length);
+        valor = buffer[posOut];
+        posOut = (posOut + 1) % numSlots;
+        cont--;
         notifyAll();
-        System.out.println("Consumido");
-       
+        return valor;
     }
 
     public synchronized void mostrar(){
-        System.out.println("N-> " + buffer.length);
-        for(int i=0; i<buffer.length; i++){
-            System.out.println(buffer[i]);
+        System.out.println("Buffer: ");
+        for (int i = 0; i < buffer.length; i++) {
+            System.out.print(buffer[i] + " ");
         }
+        System.out.println();
     }
         
 }
