@@ -48,6 +48,7 @@ public class prodCon {
             }
         }
         buffer[posInt] = valor;
+        System.out.println("Produciendo item-> " + valor);
         posInt = (posInt + 1) % numSlots;
         cont++;
         notifyAll();
@@ -67,6 +68,7 @@ public class prodCon {
             }
         }
         valor = buffer[posOut];
+        buffer[posOut] = valor-valor;
         posOut = (posOut + 1) % numSlots;
         cont--;
         notifyAll();
@@ -79,6 +81,5 @@ public class prodCon {
             System.out.print(buffer[i] + " ");
         }
         System.out.println();
-    }
-        
+    }       
 }

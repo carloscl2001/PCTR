@@ -3,7 +3,7 @@ import java.util.*;
 
 public class usaprodCon implements Runnable {
     
-    public static int N = 10;
+    
     /**
      * Atributo que representa el tipo de proceso
      */
@@ -28,18 +28,13 @@ public class usaprodCon implements Runnable {
      */
     public void run(){
         if(type == 0){
-            int item = 0;
-            for(int i = 0; i < N; i++){
-                monitor.producir(item++);
-                System.out.println("Produciendo " + item);
-            }
+            int item = 1;
+            monitor.producir(item++);
         }
         else{
             int item;
-            for(int i = 0; i < N; i++){
-                item = monitor.consumir();
-                System.out.println("Consumiendo " + item);
-            }
+            item = monitor.consumir();
+            System.out.println("Consumiendo item-> " + item);
         }
     }
 
@@ -49,18 +44,18 @@ public class usaprodCon implements Runnable {
      */
     public static void main(String[] args) throws Exception {
 
+        prodCon monitor = new prodCon(5);
+        
+        Thread h0 = new Thread (new usaprodCon(monitor, 0));
+        Thread h1 = new Thread (new usaprodCon(monitor, 1));
+        
+        h0.start();
+        h1.start();
+        
+        h0.join();
+        h1.join();
 
-        prodCon monitor = new prodCon(10);
-        
-        ExecutorService executor = Executors.newFixedThreadPool(N);
-        for (int i = 0; i < N; i++) {
-            executor.execute(new usaprodCon(monitor,i%2));
-        }
-        executor.shutdown();
-        while (!executor.isTerminated()) {}
         monitor.mostrar();
-        System.out.println("Finished all threads");
-        
         
     }
 }
