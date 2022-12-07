@@ -3,34 +3,34 @@
  */
 public class lectorEscritor {
 
-    /**
-     * Variable que representa el tamaño del buffer
-     */
-    static int N = 50;
-
-    /**
-     * Vector de tamaño N que representa el buffer
-     */
-    private int buffer[] = new int[N];
+    int lectores;
+    boolean escribiendo;
 
     public lectorEscritor(){}
 
     /**
      * Metodo para producir el buffer
      */
-    public synchronized void prodBuffer(){
-       for(int i=0; i<N; i++){
-           buffer[i]= 10;
-       }
+    public synchronized void iniciaLectura(){
+        if(escribiendo){
+           try{
+               wait();
+           }catch(InterruptedException e){
+
+           }
+        }
+        lectores++;
+        notify();
     }
     
     
     /**
      * Metodo para consumir el buffer
      */
-    public synchronized void conBuffer(){
-        for(int i=0; i<N; i++){
-            buffer[i]= 0;
+    public synchronized void acabarLectura(){
+        lectores--;
+        if(lectores == 0){
+            notify();
         }
     }
 
