@@ -1,5 +1,5 @@
 /**
- * Clase recurso que contiene la variable N y los metodos para incrementarla y mostrarla por pantalla
+ * Clase recurso que contiene la variable N y los metodos para incrementarla y observarla
  * @author Carlos A. Cortés Lora
  */
 public class recurso {
@@ -11,14 +11,14 @@ public class recurso {
     /**
      * Metodo para incrementar la variable
      */
-    public synchronized void inc() {
+    public static synchronized void inc() {
         N++;
     }
 
     /**
-     * Metodo para imprimir la variable
+     * Metodo para observar la variable
      */
-    public synchronized void observer(){
-        System.out.println(N);
+    public static synchronized long observer(){
+        return N;
     }
 }

@@ -1,39 +1,55 @@
 import java.util.Scanner;
 import java.util.concurrent.*;
 /**
- * Clase que defiene el monitor que incorpora acceso seguro al buffer
+ * Clase para usar el monitor
+ * @author Carlos A. Cortés Lora
  */
 public class usalectorEscritor implements Runnable{
-    
-    /**
-     * Creamos el monitor
-     */
-    public static lectorEscritor monitor = new lectorEscritor();
 
     /**
-     * Atributos que representa el tipo de hilo
+     * Variable para comprobar que funciona el monitor
      */
-    public int tipoHilo;
+    static long data = 0;
+
+    /**
+     * Monitor que vamos a utilizar
+     */
+    public lectorEscritor monitor;
+
+     /**
+     * Atributo que representa el tipo de proceso
+     */
+    public int tipo;
 
     /**
      * Constructor de la clase
-     * @param tipoHilo
+     * @param monitor
+     * @param tipo
      */
-    public usalectorEscritor(int tipoHilo){
-        this.tipoHilo = tipoHilo;
-    }
-    
+    public usalectorEscritor(lectorEscritor monitor, int tipo){
+        this.monitor = monitor;
+        this.tipo = tipo;
+    }    
+
     /**
      * Sobrecarga del metodo run
      */
-    public void run(){
-        if(tipoHilo == 0){
-            monitor.prodBuffer(); 
-            
-        }else{
-            monitor.conBuffer(); 
-        } 
-    }
+    public void run() {
+        if(tipo == 1){
+            for(long i = 0; i < 1000000; i++){   
+                try{monitor.iniciaLectura();}catch(Exception e){}
+                data = recurso.observer();
+                try{monitor.acabarLectura();}catch(Exception e){}
+            }
+        }
+        else{
+            for(long i = 0; i < 1000000; i++){
+                try{monitor.iniciaEscritura();}catch(Exception e){}
+                recurso.inc();
+                try{monitor.acabarEscritura();}catch(Exception e){}
+            }
+        }
+    };
     
     /**
      * Main del ejercicio
@@ -41,24 +57,24 @@ public class usalectorEscritor implements Runnable{
      * @throws Exception
      */
     public static void main(String [] args) throws Exception{
+        lectorEscritor monitor = new lectorEscritor();
 
-        //Obtenemos el numero de hilos a crear
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Introduce el numero de hilos:");
-        int n_Hilos = sc.nextInt();
-        sc.close();
-        System.out.println("-----------------------------");
+        Thread t1 = new Thread (new usalectorEscritor(monitor, 1));
+        Thread t3 = new Thread (new usalectorEscritor(monitor, 1));
+        Thread t2 = new Thread (new usalectorEscritor(monitor, 2));
+        Thread t4 = new Thread (new usalectorEscritor(monitor, 2));
 
-        //Creamoos y ejecutamos un pool de threads
-        ExecutorService executor = Executors.newFixedThreadPool(n_Hilos);
-        for(int i=0; i<n_Hilos; i++){
-            executor.execute(new usalectorEscritor(i%2));
-        }
-        executor.shutdown();
-        while(!executor.isTerminated()){}
+        t1.start();
+        t2.start();
+        t3.start();
+        t4.start();
 
-        //Imprimimos el buffer
-        monitor.mostrarBuffer();
+        t1.join();
+        t2.join();
+        t3.join();
+        t4.join();
+
+        System.out.println("El valor final de N es: " + data);
     }
     
 }
