@@ -1,11 +1,12 @@
 import java.util.*;
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * Clase de cuentaCorriente con un cerrojo de clase ReentrantLock
+ * Clase de cuentaCorriente con semáforos de la clase Semaphore
  * @author Carlos A. Cortés Lora
  */
-public class cCRL {
+public class ccSem {
     /**
      * Atributos de cuentaCorriente-> n_cuenta_ y saldo_
      */
@@ -15,17 +16,18 @@ public class cCRL {
     /**
      * ReentrantLock
      */
-    public ReentrantLock lock = new ReentrantLock();
+    private Semaphore sem;
 
     /**
      * Constructor de cuentaCorriente
      * @param n_cuenta
      * @param saldo
      */
-    public cCRL(int n_cuenta, double saldo)
+    public ccSem(int n_cuenta, double saldo)
     {
         n_cuenta_ = n_cuenta;
         saldo_  = saldo;
+        this.sem = new Semaphore(1);
     }
 
     
@@ -35,9 +37,10 @@ public class cCRL {
      * @return saldo_
      */
     public void saldo(){
-        lock.lock();
+        try{sem.acquire();}
+        catch(InterruptedException e){}
         try{System.out.println("Saldo: " + saldo_);}
-        finally{lock.unlock();}
+        finally{sem.release();}
     }
 
 
@@ -45,18 +48,20 @@ public class cCRL {
      * Modificador del saldo
      */
     public void deposito(double n) {
-        lock.lock();
+        try{sem.acquire();}
+        catch(InterruptedException e){}
         try{saldo_ += n;}
-        finally{lock.unlock();}
+        finally{sem.release();}
     }
 
     /**
      * Modificador del reintegro
      */
     public void reintegro(double n) {
-        lock.lock();
+        try{sem.acquire();}
+        catch(InterruptedException e){}
         try{saldo_ -= n;}
-        finally{lock.unlock();}
+        finally{sem.release();}
     }
 
 }
