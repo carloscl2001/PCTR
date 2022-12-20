@@ -14,7 +14,7 @@ public class ccSem {
     private double saldo_;
 
     /**
-     * ReentrantLock
+     * Semáforo de la clase Semaphore
      */
     private Semaphore sem;
 
