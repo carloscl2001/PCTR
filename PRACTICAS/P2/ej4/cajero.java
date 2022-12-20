@@ -1,7 +1,7 @@
 public class cajero implements Runnable{
 
     //Atributos
-    private cuentaCorriente cC_;
+    private cCRL cC_;
     private double cantidad_;
     private int operacion_;
 
@@ -11,7 +11,7 @@ public class cajero implements Runnable{
      * @param cantidad 
      * @param operacion tipo de operacion
      */
-    public cajero(cuentaCorriente cC, double cantidad, int operacion){
+    public cajero(cCRL cC, double cantidad, int operacion){
         cC_ = cC;
         cantidad_ = cantidad;
         operacion_ = operacion;

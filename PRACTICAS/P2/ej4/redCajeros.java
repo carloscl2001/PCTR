@@ -1,8 +1,8 @@
-package ej4;
+import java.util.*;
 public class redCajeros {
     
     public static void main(String[] args) throws Exception{
-        cuentaCorriente cC = new cuentaCorriente(12345, 0);
+        cCRL cC = new cCRL(12345, 0);
 
         Runnable r1 = new cajero(cC, 25, 1);
         Runnable r2 = new cajero(cC, 25, 2);
