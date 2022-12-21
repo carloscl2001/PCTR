@@ -63,9 +63,7 @@ public class lectorEscritor {
                 }catch(InterruptedException e){}
             }
             CondLectores.signalAll();
-        }finally{
-            lock.unlock();
-        }
+        }finally{lock.unlock();}
         
     }
     
@@ -80,9 +78,7 @@ public class lectorEscritor {
             while(lectores == 0){
                 CondEscritores.signalAll();
             }
-        } finally{
-            lock.unlock();
-        }
+        } finally{lock.unlock();}
         
     }
 
@@ -98,9 +94,7 @@ public class lectorEscritor {
                 }catch(InterruptedException e){}
             }
             escribiendo = true;
-        } finally{
-            lock.unlock();
-        }
+        } finally{lock.unlock();}
         
     }
 
@@ -111,13 +105,8 @@ public class lectorEscritor {
         lock.lock();
         try{
             escribiendo = false;
-            if(lectores == 0){CondEscritores.signalAll();}
-            
-            else{CondLectoresCondLectores.signalAll();}
-            
-        } finally{
-            lock.unlock();
-        }
-        
+            CondLectores.signalAll();
+            CondEscritores.signalAll();
+        } finally{lock.unlock();}
     }
 }

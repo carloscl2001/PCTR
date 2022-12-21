@@ -1,4 +1,3 @@
-package ej3;
 import java.util.Scanner;
 import java.util.concurrent.*;
 /**
