@@ -111,7 +111,10 @@ public class lectorEscritor {
         lock.lock();
         try{
             escribiendo = false;
-            CondLectores.signalAll();
+            if(lectores == 0){CondEscritores.signalAll();}
+            
+            else{CondLectoresCondLectores.signalAll();}
+            
         } finally{
             lock.unlock();
         }
