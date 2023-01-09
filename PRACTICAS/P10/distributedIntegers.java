@@ -42,7 +42,6 @@ class distributedIntegers {
     	long rango = 10000000;
     	int numTareas = 32;
     	
-
 		MPI.Init(args);
 
 		id = MPI.COMM_WORLD.Rank(); 
@@ -52,7 +51,7 @@ class distributedIntegers {
 			v_rango[0] =(long) rango/numTareas;
 		}
 
-		//EL proceso master envia a lso demas el tamaño del rango mediante broadcast
+		//EL proceso master envia a los demas el tamaño del rango mediante broadcast
 		MPI.COMM_WORLD.Bcast(v_rango, 0, 1, MPI.LONG, master);
         
         //Los demas procesos obtienen su tamaño y obtienen el numero de primos que le corresponde
@@ -68,7 +67,7 @@ class distributedIntegers {
 
 		//El proceso master meuestra por pantalla la cantidad de numero primos enncontrados en el rango
 		if (id == master){
-			System.out.println("Numero de primos encontrados en el rango [0-" + rango + "]: " + nPrimosTotales[0] );
+			System.out.println("Numero de primos encontrados en el rango [0 -" + rango + "]: " + nPrimosTotales[0] );
 		}
 
 		MPI.Finalize();
