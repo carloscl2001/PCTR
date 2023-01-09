@@ -16,10 +16,10 @@ class distributedIntegers {
      * @return bool true en caso de que sea primo
      */
     public static boolean esPrimo(long n){
-        if(n <= 1){
+        if((n == 1) && (n == 0)){
             return false;
         }
-        for(long i = 2; i <= Math.sqrt(n); ++i){
+        for(long i = 2; i < n/2; i++){
             if(n % i == 0){
                 return false;
             }
@@ -39,7 +39,7 @@ class distributedIntegers {
     	long[] nPrimos = new long[1];
     	long[] nPrimosTotales = new long[1];
     	long numPrimo = 0;
-    	long rango = 10000000;
+    	long rango = 1000000;
     	int numTareas = 32;
     	
 		MPI.Init(args);
