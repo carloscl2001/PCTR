@@ -4,6 +4,8 @@
 import mpi.*;
 import java.lang.Math;
 import java.util.Random;
+
+import javax.swing.text.Highlighter.Highlight;
 /**
  * Clase del ejercicio 3 de la practica 10
  * @author Carlos Antonio Cortés Lora
@@ -12,29 +14,19 @@ class distributedIntegers {
 
     /**
      * Funcion para saber si un numero es primo o no
-     * @param numeor numero a averiguar si es primo
+     * @param numero numero a averiguar si es primo
      * @return bool true en caso de que sea primo
      */
     public static boolean esPrimo(long numero) {
-        if (numero == 2) {
+        if (numero == 2) 
             return true;
-        }
-        if (numero % 2 == 0) {
+        if (numero % 2 == 0)
             return false;
-        }
-        for (long i = 3; i <= Math.sqrt(numero); i += 2) {
-            if (numero % i == 0) {
+        for (long i = 3; i <= Math.sqrt(numero); i += 2)
+            if (numero % i == 0)
                 return false;
-            }
-        }
         return true;
     }
-
-    
-
-    
-    
-
 
     /**
      * Main del ejercicio
