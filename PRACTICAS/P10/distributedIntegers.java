@@ -12,20 +12,29 @@ class distributedIntegers {
 
     /**
      * Funcion para saber si un numero es primo o no
-     * @param n numero a averiguar si es primo
+     * @param numeor numero a averiguar si es primo
      * @return bool true en caso de que sea primo
      */
-    public static boolean esPrimo(long n){
-        if((n == 1) && (n == 0)){
+    public static boolean esPrimo(long numero) {
+        if (numero == 2) {
+            return true;
+        }
+        if (numero % 2 == 0) {
             return false;
         }
-        for(long i = 2; i < n/2; i++){
-            if(n % i == 0){
+        for (long i = 3; i <= Math.sqrt(numero); i += 2) {
+            if (numero % i == 0) {
                 return false;
             }
         }
         return true;
     }
+
+    
+
+    
+    
+
 
     /**
      * Main del ejercicio

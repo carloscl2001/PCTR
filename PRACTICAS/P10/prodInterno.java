@@ -16,7 +16,7 @@ public class prodInterno {
         int master = 0; 
         int slave = 1;
         int tag = 100; 
-        int unitSize = 10;
+        int unitSize = 4;
 
         if(id==master){ //codigo del master
             //|fase de envio
