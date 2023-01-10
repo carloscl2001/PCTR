@@ -31,3 +31,5 @@ public class sBonoLoto extends UnicastRemoteObject implements iBonoLoto{
         System.out.println("Servidor BonoLoto preparado");
     }
 }
+
+

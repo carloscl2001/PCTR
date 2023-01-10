@@ -1,0 +1,7 @@
+/**
+ * cPiMonteCarlo
+ */
+public class cPiMonteCarlo {
+
+    
+}
