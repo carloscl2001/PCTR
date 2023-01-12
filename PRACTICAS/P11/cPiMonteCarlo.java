@@ -1,7 +1,3 @@
-/**
- * cPiMonteCarlo
- */
 public class cPiMonteCarlo {
-
     
 }
