@@ -1,5 +1,5 @@
 //COMPILACION: javac -cp .;%MPJ_HOME%/lib/mpj.jar distributedIntegers.java
-//EJECUCION: mpjrun.bat -np 5 distributedIntegers
+//EJECUCION: mpjrun.bat -np 10 distributedIntegers
 
 import mpi.*;
 import java.lang.Math;
@@ -49,14 +49,22 @@ class distributedIntegers {
 		//EL proceso master envia a los demas el tamaño del rango mediante broadcast
 		MPI.COMM_WORLD.Bcast(v_rango, 0, 1, MPI.INT, master);
         
-        //Los demas procesos obtienen su tamaño y obtienen el numero de primos que le corresponde
+        //Los procesos esclavos reciben la cantidad de numeros correspondiente y obtienen el numero de primos que le corresponde
         if(id != master){
-            for( int i = (id - 1 ) * v_rango[0]; i < (id) * v_rango[0]; i++ ){
-                if(esPrimo(i)){nPrimos[0]++;} 
+            int finalRango;
+            //En caso de que sea el ultimo proceso
+            if (id == numTareas - 1)
+                finalRango = rango + 1;            
+            //En caso de que sea otro proceso 
+            else
+                finalRango = v_rango[0] * id;
+            for (int i = v_rango[0] * (id-1); i < finalRango; i++){
+                if (esPrimo(i))
+                    nPrimos[0]++;
             }
         }   
 		
-		//Los demas procesos reducen al master datos parciales y se suman
+		//Los procesos esclavos reducen al master datos parciales y se suman
 		MPI.COMM_WORLD.Reduce(nPrimos, 0, nPrimosTotales, 0, 1, MPI.INT, MPI.SUM, 0);
 
 		//El proceso master meuestra por pantalla la cantidad de numero primos enncontrados en el rango
