@@ -1,0 +1,4 @@
+1.  Compilamos todos archivos -> javac *.java
+2.  Primer Terminal -> rmiregistry
+3.  Segunda Terminal -> java sArchivo
+4.  Tercera Terminal -> Java cArchivo

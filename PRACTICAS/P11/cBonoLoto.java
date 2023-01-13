@@ -3,7 +3,7 @@ import java.rmi.registry.*;
 import java.util.Random;
 
 /**
- * Clase para la implemntacion del cliente del bonoloto
+ * Clase para la implementacion del cliente del bonoloto
  * @author Carlos Antonio Cortés Lora 
  */
 public class cBonoLoto {
