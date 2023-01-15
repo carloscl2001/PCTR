@@ -1,3 +1,6 @@
+//Ejercicio 1 de la practica 12
+//@author: Carlos Antonio Cortés Lora
+
 #include <iostream>
 #include <mutex>
 #include <math.h>
