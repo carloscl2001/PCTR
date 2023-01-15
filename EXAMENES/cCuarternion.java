@@ -1,6 +1,8 @@
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Scanner;
+import java.rmi.Naming;
+import java.rmi.registry.LocateRegistry;
 
 public class cCuarternion{
     public static void main(String[] args) throws Exception {
@@ -30,7 +32,7 @@ public class cCuarternion{
         //Suma
         iCuaternion RefObRemoto1 = (iCuaternion)Naming.lookup("//localhost/Suma");
         float[] q3 = new float[4];
-        RefObRemoto1.sumCuaternion(q1, q2) = q3;
+        q3 = RefObRemoto1.sumCuaternion(q1, q2);
         System.out.println("Cuaternario 1 sumado: ");
         for (int i = 0; i < q3.length; i++) {
             System.out.println(q1[i]);
@@ -47,7 +49,7 @@ public class cCuarternion{
         //Conjugado
         iCuaternion RefObRemoto2 = (iCuaternion)Naming.lookup("//localhost/Conjugado");
         float[] q4 = new float[4];
-        RefObRemoto2.conCuaternion(q1) = q4;
+        q4 = RefObRemoto2.conCuaternion(q1) ;
         System.out.println("Cuaternario 1 tras ser conjugado: ");
         for (int i = 0; i < q4.length; i++) {
             System.out.println(q4[i]);
@@ -57,20 +59,15 @@ public class cCuarternion{
         System.out.println("Introduce el numero por el que quieres escalar el cuaterniones");
         float p = s.nextFloat();
         iCuaternion RefObRemoto3 = (iCuaternion)Naming.lookup("//localhost/Escalado");
-        float[] q5 = new float[4];
-        RefObRemoto3.xCuaternion(q1, p) = q5;
+        float[] q5 = RefObRemoto3.xCuaternion(q1, p);
+        System.out.println("El cuaternio escalado es: ");
+        for (int i = 0; i < q5.length; i++) {
+            System.out.println(q5[i]);
+        }
 
         //Traza
         iCuaternion RefObRemoto4 = (iCuaternion)Naming.lookup("//localhost/Traza");
         float q6 = RefObRemoto4.tCuaternion(q1);
         System.out.println("La traza del cuaternio es: " + q6);
-
-
-        
-        
-        
-
-        
-        
     }
 }
