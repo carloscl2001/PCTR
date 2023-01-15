@@ -16,14 +16,18 @@ int nHits = 0;
 //Numero de puntos a lanzar
 int nPuntos = 0;
 
+//Numero de puntos a lanzar por hilo
+int nPuntosPorHilo = 0;
+
 //Mutex para controlar el acceso a las variables compartidas
 recursive_mutex m;
 
+//Metodo MoteCarlo
 void MonteCarlo(){
     int hitsValidos = 0;
     int hits = 0;
 
-    for (int i = 0; i < nPuntos; i++)
+    for (int i = 0; i < nPuntosPorHilo; i++)
     {
         double x = (double)rand() / RAND_MAX;
         double y = (double)rand() / RAND_MAX;
@@ -39,7 +43,6 @@ void MonteCarlo(){
 
 
 
-
 int main()
 {   
     int n = 0, n_hilos = 0;
@@ -48,13 +51,16 @@ int main()
 
     cout<< "\nIntroduzca el numero de hilos a utilizar -> ";
     cin >> n_hilos;
+
+    nPuntosPorHilo = nPuntos / n_hilos;
+
     std::chrono::time_point<std::chrono::system_clock> start, end;
     start = std::chrono::system_clock::now();
 
     thread hilos [n_hilos];
     
     for(int i =0; i < n_hilos ; i ++) 
-        hilos[i] =thread(MonteCarlo);
+        hilos[i] = thread(MonteCarlo);
     for(int i =0; i < n_hilos ; i ++) 
         hilos[i].join();
     
