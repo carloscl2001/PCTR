@@ -2,6 +2,8 @@
 #include <mutex>
 #include <math.h>
 #include <thread>
+#include <chrono>
+#include <ctime>
 
 using namespace std;
 
@@ -44,16 +46,23 @@ int main()
     cout << "Introduzca el numero de puntos a lanzar -> ";
     cin >> nPuntos;
 
-    cout<< "\nIntroduzca el numero de hilos a utilizar ->";
+    cout<< "\nIntroduzca el numero de hilos a utilizar -> ";
     cin >> n_hilos;
+    std::chrono::time_point<std::chrono::system_clock> start, end;
+    start = std::chrono::system_clock::now();
 
-    thread hilos [ n_hilos ];
+    thread hilos [n_hilos];
+    
     for(int i =0; i < n_hilos ; i ++) 
         hilos[i] =thread(MonteCarlo);
     for(int i =0; i < n_hilos ; i ++) 
         hilos[i].join();
+    
+    end = std::chrono::system_clock::now();
+    std::chrono::duration<double> elapsed_seconds = end-start;
 
     cout << "El resultadoo es: " << (double)totalHits / nHits << endl;
+    cout << "Tiempo: " << elapsed_seconds.count() << "s\n";
 
     return 0;
 }
