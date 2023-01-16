@@ -45,7 +45,7 @@ void MonteCarlo(){
 }
 
 
-
+//Main del ejericicio principal
 int main()
 {   
     int n = 0, n_hilos = 0;
@@ -54,7 +54,7 @@ int main()
 
     cout<< "\nIntroduzca el numero de hilos a utilizar -> ";
     cin >> n_hilos;
-
+    
     nPuntosPorHilo = nPuntos / n_hilos;
 
     std::chrono::time_point<std::chrono::system_clock> start, end;
