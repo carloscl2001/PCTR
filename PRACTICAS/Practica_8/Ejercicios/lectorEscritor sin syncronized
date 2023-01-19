@@ -1,0 +1,28 @@
+public class lectorEscritor {
+    private static boolean escribiendo = false;
+    private static int lectores = 0;
+
+    public lectorEscritor(){}
+
+    public synchronized void iniciaLectura(){
+            while (escribiendo) { try { wait(); } catch (InterruptedException e) {e.printStackTrace();} } 
+            lectores++;
+            notifyAll();
+    }
+
+    public synchronized void acabarLectura(){
+            lectores--;
+            if(lectores == 0){ notifyAll(); }
+    }
+
+    public synchronized void iniciaEscritura(){
+            while (lectores != 0 || escribiendo) { try { wait(); } catch (InterruptedException e) {e.printStackTrace();} }
+            escribiendo = true;
+    }
+
+    public synchronized void acabarEscritura(){
+            escribiendo = false;
+            notifyAll();
+    }
+
+}
