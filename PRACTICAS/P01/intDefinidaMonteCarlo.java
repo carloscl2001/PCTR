@@ -29,7 +29,7 @@ public class intDefinidaMonteCarlo{
 
                 if(y <= f(x) ){cont_exito++;}     
             }
-            System.out.println("Integral aproximada f(x) = sin ->" + (cont_exito/puntos));
+            System.out.println("Integral aproximada de f(x) = sin ->" + (cont_exito/puntos));
         }
 
         if(funcion == 1){
@@ -39,7 +39,7 @@ public class intDefinidaMonteCarlo{
 
                 if(y <= g(x) ){cont_exito++;}     
             }
-            System.out.println("Integral aproximada g(x) = x -> " + (cont_exito/puntos));
+            System.out.println("Integral aproximada de g(x) = x -> " + (cont_exito/puntos));
 
         }
 
