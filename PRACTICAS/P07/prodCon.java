@@ -39,7 +39,9 @@ public class prodCon {
      * @param valor a insertar en el buffer
      */
     public synchronized void producir(int valor){ 
-        //condicion de guarda
+        //condicion de guarda: ¿Vector está lleno?
+
+        //que el vector este lleno de elementos -> NO PODEMOS PRODUCIMOS -> se manda a la cola
         while (cont == numSlots) {
             try {
                 wait();
@@ -47,6 +49,7 @@ public class prodCon {
                 e.printStackTrace();
             }
         }
+        //que el vector tega un hueco libre -> SI PODEMOS PRODUCIR -> no está lleno 
         buffer[posInt] = valor;
         System.out.println("Produciendo item-> " + valor);
         posInt = (posInt + 1) % numSlots;

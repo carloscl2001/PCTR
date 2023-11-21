@@ -3,7 +3,7 @@
  * @author Carlos Antonio Cortes Lora
  */
 public class deadlock {
-    public static void main(String[] args){
+    public static void main(String[] args) throws Exception{
         
         /**
          * Creamos la region A
@@ -64,12 +64,14 @@ public class deadlock {
                         }
                     }
                 }
+                System.out.println("Hilo A finnalizado");
             }
         });
 
-        Hilo_B.start();
         Hilo_A.start();
+        Hilo_B.start();
         Hilo_C.start();
+        Hilo_A.join();
 
 
         System.out.println("Fin");
