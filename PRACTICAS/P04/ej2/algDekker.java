@@ -8,7 +8,7 @@ public class algDekker extends Thread {
      * Variables estaticas del algorimtmo de dekker
      */
     private static volatile int n = 0;
-    private static volatile int turno = 1;
+    private static volatile int turno = 2;
     private static volatile boolean flag1 = false;
     private static volatile boolean flag2 = false;
 
@@ -32,7 +32,7 @@ public class algDekker extends Thread {
 
         //en caso de que el hilo sea 1 sumara a la variable n
         if(tipoHilo == 1) {
-            while(true) {
+            for(int i = 0; i < 10000000; i++) {
                 //non-critical section
                 flag1 = true;
                 while (flag2 == true) {
@@ -43,9 +43,9 @@ public class algDekker extends Thread {
                     }
                 }
                 //critical section
-                System.out.println("Identificador: " + getName());
+                //System.out.println("Identificador: " + getName());
                 n++;
-                System.out.println("n: " + n);
+                //System.out.println("n: " + n);
 
                 turno = 2;
                 flag1 = false;
@@ -53,7 +53,7 @@ public class algDekker extends Thread {
             }
         } else{
             //en caso de que el hilo sea 2 restara a la variable n
-            while(true) {
+            for(int i = 0; i < 10000000; i++) {
                 //non-critical section
 
                 flag2 = true;
@@ -65,9 +65,9 @@ public class algDekker extends Thread {
                     }
                 }
                 //critical section
-                System.out.println("Identificador: " + getName());
+                //System.out.println("Identificador: " + getName());
                 n--;
-                System.out.println("n: " + n);
+                //System.out.println("n: " + n);
 
                 turno = 1;
                 flag2 = false;
@@ -86,8 +86,7 @@ public class algDekker extends Thread {
 
         h1.start();
         h2.start();
-        h1.join();
-        h2.join();
+        System.out.println("_____________________________________________________");
         System.out.println("Valor de n: " + n);
     }
 }
