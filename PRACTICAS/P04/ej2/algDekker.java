@@ -86,7 +86,7 @@ public class algDekker extends Thread {
 
         h1.start();
         h2.start();
-        System.out.println("_____________________________________________________");
+        System.out.println("---------------------------------------------------");
         System.out.println("Valor de n: " + n);
     }
 }
