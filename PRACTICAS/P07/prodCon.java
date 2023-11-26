@@ -57,7 +57,6 @@ public class prodCon {
         notifyAll();
         // System.out.println("-----------------------");
         mostrar();
-        
     }
 
     /**
