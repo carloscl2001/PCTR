@@ -28,13 +28,11 @@ public class usaprodCon implements Runnable {
      */
     public void run(){
         if(type == 0){
-            int item = 1;
-            monitor.producir(item++);
+            int item = 5;
+            monitor.producir(item);
         }
         else{
-            int item;
-            item = monitor.consumir();
-            System.out.println("Consumiendo item-> " + item);
+            monitor.consumir();
         }
     }
 
@@ -47,15 +45,25 @@ public class usaprodCon implements Runnable {
         prodCon monitor = new prodCon(5);
         
         Thread h0 = new Thread (new usaprodCon(monitor, 0));
-        Thread h1 = new Thread (new usaprodCon(monitor, 1));
+        Thread h1 = new Thread (new usaprodCon(monitor, 0));
+        Thread h2 = new Thread (new usaprodCon(monitor, 0));
+        Thread h3 = new Thread (new usaprodCon(monitor, 1));
+        Thread h4 = new Thread (new usaprodCon(monitor, 1));
+        Thread h5 = new Thread (new usaprodCon(monitor, 1));
         
         h0.start();
         h1.start();
-        
+        h2.start();
+        h3.start();
+        h4.start();
+        h5.start();
+
         h0.join();
         h1.join();
-
-        monitor.mostrar();
+        h2.join();
+        h3.join();
+        h4.join();
+        h5.join();
         
     }
 }

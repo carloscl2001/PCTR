@@ -51,18 +51,20 @@ public class prodCon {
         }
         //que el vector tega un hueco libre -> SI PODEMOS PRODUCIR -> no está lleno 
         buffer[posInt] = valor;
-        System.out.println("Produciendo item-> " + valor);
+        // System.out.println("Produciendo item-> " + valor);
         posInt = (posInt + 1) % numSlots;
         cont++;
         notifyAll();
+        // System.out.println("-----------------------");
+        mostrar();
+        
     }
 
     /**
      * Método que extrae un entero del buffer
      * @return valor del buffer
      */
-    public synchronized int consumir(){
-        int valor;
+    public synchronized void consumir(){
         while(cont == 0){
             try {
                 wait();
@@ -70,15 +72,16 @@ public class prodCon {
                 e.printStackTrace();
             }
         }
-        valor = buffer[posOut];
-        buffer[posOut] = valor-valor;
+        buffer[posOut] = 0;
         posOut = (posOut + 1) % numSlots;
         cont--;
         notifyAll();
-        return valor;
+        mostrar();
+       
     }
 
     public synchronized void mostrar(){
+        //System.out.println("--------------------------------------");
         System.out.println("Buffer: ");
         for (int i = 0; i < buffer.length; i++) {
             System.out.print(buffer[i] + " ");
