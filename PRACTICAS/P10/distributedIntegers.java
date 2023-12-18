@@ -11,7 +11,7 @@ class distributedIntegers {
 
     /**
      * Funcion para saber si un numero es primo o no
-     * @param numeor numero a averiguar si es primo
+     * @param numero numero a averiguar si es primo
      * @return bool true en caso de que sea primo
      */
     public static boolean esPrimo(int numero) {
