@@ -14,7 +14,7 @@ public class cPiMonteCarlo {
         iPiMonteCarlo RefObRemoto = (iPiMonteCarlo)Naming.lookup("//localhost/Servidor");
         Scanner s = new Scanner(System.in);
         
-        System.out.println("1. Añadir puntos");
+        System.out.println("1. Añadir puntos a la aproximacion");
         System.out.println("2. Realizar aproximacion");
         System.out.println("3. Resetear el servidor");
         System.out.print("Elige una opcion-> ");

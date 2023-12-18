@@ -85,10 +85,10 @@ public class PiMonteCarlo extends UnicastRemoteObject implements iPiMonteCarlo{
      */
     public static void main(String[] args) throws Exception{
         //creamos el objeto remoto
-        PiMonteCarlo obj = new PiMonteCarlo();
+        iPiMonteCarlo obj = new PiMonteCarlo();
 
         //Se registra el servicio
-        Naming.bind("Servidor", obj);
+        Naming.rebind("Servidor", obj);
         System.out.println("Servidor preparado");
     }
 }
