@@ -9,7 +9,7 @@ import java.io.*;
  * Clase del Servidor del ejericicio 1 de la practica 6
  * @author Carlos Antonio Cortes Lora
  */
-public class ServidorHiloConPool implements Runnable{
+class ServidorHiloConPool implements Runnable{
 
     /**
      * Atributo de tipo Socket que representa el socket del cliente.

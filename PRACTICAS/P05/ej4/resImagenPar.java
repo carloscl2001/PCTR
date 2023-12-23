@@ -99,6 +99,6 @@ public class resImagenPar implements Runnable {
             executor.execute(new resImagenPar(TamVentana * i, TamVentana * (i+1)));
         }
         executor.shutdown();
-        while(!executor.isTerminated());   
+        while(!executor.isTerminated());//esto es solo una comprobación de seguridad
     }
 }
